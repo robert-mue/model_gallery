@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pangolin harvest — Simile model gallery</title>
+<link rel="stylesheet" href="../../gallery.css">
+</head>
+<body>
+<main>
+<p class="crumb"><a href="../../">Simile model gallery</a></p>
+<h1>Pangolin harvest</h1>
+<p class="lede">How harvesting can drive a rare species extinct. Hunters take pangolins, a rare species, and a common species alongside them. Their effort grows while revenue exceeds cost, and the price of a pangolin rises as pangolins get rarer, so the rarer they become the more they are worth hunting. Some hunting is in pursuit of pangolins; the rest takes them opportunistically while hunting the common species.</p>
+<p>A published model, converted from the authors’ R script and checked against it step for step. Its three equations (pangolins, the common species, harvest effort) are drawn as flows: births and catches, and effort rising with revenue and falling with cost. Every symbol in the paper is a parameter under its own name; <code>s</code> is the share of hunting that is pursuit. The defaults are the paper’s pangolins, a slow-growing common species, a weak link between rarity and price, and <code>s</code> = 0.5.</p>
+<p>Run it with a time step of 0.1 for 1000 years, and plot <code>pangolins</code> and <code>common_species</code>. Then change <code>s</code>, or the price parameters <code>a</code>, <code>b</code> and <code>z</code>, and see how soon the pangolins go.</p>
+<a class="open" href="https://robert-mue.github.io/simile/index.html?open=https://robert-mue.github.io/model_gallery/models/pangolin/pangolin.json" target="_blank" rel="noopener">Open in Simile</a>
+<p class="facts">The model spec: <a href="pangolin.json">pangolin.json</a>.</p>
+<h2>Published in</h2>
+<p>Almeida, R. J., Bonachela, J. A., &amp; Lockwood, J. L. (2023). Multiple co-occurring bioeconomic drivers of overexploitation can accelerate rare species extinction risk. <i>Journal of Applied Ecology</i>, 60(5), 754–763. <a href="https://doi.org/10.1111/1365-2664.14376">https://doi.org/10.1111/1365-2664.14376</a></p>
+<p>Supporting information, the authors’ R script for the model: Almeida, R., Bonachela, J., &amp; Lockwood, J. (2023). Multiple co-occurring bioeconomic drivers of overexploitation can accelerate rare species extinction risk [Dataset]. Dryad. <a href="https://doi.org/10.5061/dryad.0p2ngf25b">https://doi.org/10.5061/dryad.0p2ngf25b</a></p>
+<figure><img src="diagram.png" width="1086" height="860" alt="The Pangolin harvest model's diagram: three stocks, pangolins, common_species and effort, with their flows, and the price, revenue and cost that drive effort"><figcaption>The model’s diagram.</figcaption></figure>
+</main>
+</body>
+</html>
