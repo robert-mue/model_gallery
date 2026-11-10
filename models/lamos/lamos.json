@@ -1,0 +1,2250 @@
+{
+  "id": "lamos1a",
+  "name": "LAMOS",
+  "format": 3,
+  "schema": "simile-v1",
+  "enums": {},
+  "submodels": {
+    "submodel1": {
+      "kind": "fixed-membership",
+      "parent": null,
+      "label": "patch",
+      "props": {
+        "dimensions": "225"
+      }
+    },
+    "submodel2": {
+      "kind": "single",
+      "parent": "submodel1",
+      "label": "plants",
+      "props": {}
+    },
+    "submodel3": {
+      "kind": "fixed-membership",
+      "parent": "submodel2",
+      "label": "plant_species",
+      "props": {
+        "dimensions": "5"
+      }
+    },
+    "submodel4": {
+      "kind": "single",
+      "parent": "submodel1",
+      "label": "soil_water",
+      "props": {}
+    },
+    "submodel5": {
+      "kind": "single",
+      "parent": null,
+      "label": "neighbour",
+      "props": {}
+    },
+    "submodel6": {
+      "kind": "single",
+      "parent": null,
+      "label": "fire",
+      "props": {}
+    },
+    "submodel7": {
+      "kind": "single",
+      "parent": "submodel6",
+      "label": "conditional_fire",
+      "props": {
+        "timeBase": "2"
+      }
+    },
+    "submodel8": {
+      "kind": "fixed-membership",
+      "parent": "submodel7",
+      "label": "fire_patch",
+      "props": {
+        "dimensions": "225"
+      }
+    },
+    "submodel9": {
+      "kind": "single",
+      "parent": "submodel6",
+      "label": "fire_test",
+      "props": {}
+    },
+    "submodel10": {
+      "kind": "fixed-membership",
+      "parent": "submodel6",
+      "label": "patch_results",
+      "props": {
+        "dimensions": "225"
+      }
+    },
+    "submodel11": {
+      "kind": "single",
+      "parent": "submodel6",
+      "label": "fire_results",
+      "props": {
+        "timeBase": "2"
+      }
+    }
+  },
+  "nodes": {
+    "node1": {
+      "type": "variable",
+      "parent": null,
+      "label": "cs",
+      "props": {
+        "value": "[[0.005,0.003,0.006,0.007,0.006],[0.002,0.005,0.006,0.007,0.006],[0.002,0.002,0.005,0.006,0.002],[0.002,0.002,0.003,0.004,0.002],[0.002,0.002,0.003,0.002,0.005]]",
+        "units": "array(array(1,5),5)"
+      }
+    },
+    "node2": {
+      "type": "variable",
+      "parent": null,
+      "label": "ms",
+      "props": {
+        "value": "[0.1,0.1,0.1,0.1,0.1]",
+        "units": "array(1,size(plant_species))"
+      }
+    },
+    "node3": {
+      "type": "variable",
+      "parent": null,
+      "label": "water_use",
+      "props": {
+        "value": "[0.5,0.5,0.5,0.5,0.5]",
+        "units": "array(1,size(plant_species))"
+      }
+    },
+    "node4": {
+      "type": "variable",
+      "parent": null,
+      "label": "rain",
+      "props": {
+        "value": "100",
+        "min": "0",
+        "max": "500",
+        "units": "int"
+      }
+    },
+    "node5": {
+      "type": "variable",
+      "parent": "submodel1",
+      "label": "row",
+      "props": {
+        "value": "floor((index(1)-1)/15)+1",
+        "units": "int"
+      }
+    },
+    "node6": {
+      "type": "stock",
+      "parent": "submodel3",
+      "label": "number",
+      "props": {
+        "initial": "5"
+      }
+    },
+    "node7": {
+      "type": "cloud",
+      "parent": "submodel3",
+      "label": "",
+      "props": {}
+    },
+    "node8": {
+      "type": "cloud",
+      "parent": "submodel3",
+      "label": "",
+      "props": {}
+    },
+    "node9": {
+      "type": "variable",
+      "parent": "submodel3",
+      "label": "feedback",
+      "props": {
+        "value": "sum([c]*[numbers])"
+      }
+    },
+    "node10": {
+      "type": "variable",
+      "parent": "submodel3",
+      "label": "c",
+      "props": {
+        "value": "element([[cs]],index(1))",
+        "units": "array(1,5)"
+      }
+    },
+    "node11": {
+      "type": "variable",
+      "parent": "submodel3",
+      "label": "seeds_staying",
+      "props": {
+        "value": "seeds_produced-seeds_dispersing"
+      }
+    },
+    "node12": {
+      "type": "variable",
+      "parent": "submodel3",
+      "label": "m",
+      "props": {
+        "value": "element([ms],index(1))"
+      }
+    },
+    "node13": {
+      "type": "variable",
+      "parent": "submodel3",
+      "label": "water_multiplier",
+      "props": {
+        "value": "if water>100 then 1 elseif water<50 then 0 else(water-50)/50"
+      }
+    },
+    "node14": {
+      "type": "variable",
+      "parent": "submodel3",
+      "label": "seeds_dispersing",
+      "props": {
+        "value": "seeds_produced*element([dispersability],index(1))"
+      }
+    },
+    "node15": {
+      "type": "variable",
+      "parent": "submodel3",
+      "label": "seeds_produced",
+      "props": {
+        "value": "element([seeds_per_indiv],index(1))*number"
+      }
+    },
+    "node16": {
+      "type": "cloud",
+      "parent": "submodel3",
+      "label": "",
+      "props": {}
+    },
+    "node17": {
+      "type": "variable",
+      "parent": "submodel3",
+      "label": "seeds_in",
+      "props": {
+        "value": "element(sum({[seeds_transfer_0]}),index(1))"
+      }
+    },
+    "node18": {
+      "type": "variable",
+      "parent": "submodel2",
+      "label": "numbers",
+      "props": {
+        "value": "[number]",
+        "units": "array(1,5)"
+      }
+    },
+    "node19": {
+      "type": "variable",
+      "parent": "submodel2",
+      "label": "n1",
+      "props": {
+        "value": "element([number],1)",
+        "min": "0",
+        "max": "200"
+      }
+    },
+    "node20": {
+      "type": "variable",
+      "parent": "submodel2",
+      "label": "n2",
+      "props": {
+        "value": "element([number],2)",
+        "min": "0",
+        "max": "200"
+      }
+    },
+    "node21": {
+      "type": "variable",
+      "parent": "submodel2",
+      "label": "n3",
+      "props": {
+        "value": "element([number],3)",
+        "min": "0",
+        "max": "200"
+      }
+    },
+    "node22": {
+      "type": "variable",
+      "parent": "submodel2",
+      "label": "n4",
+      "props": {
+        "value": "element([number],4)",
+        "min": "0",
+        "max": "200"
+      }
+    },
+    "node23": {
+      "type": "variable",
+      "parent": "submodel2",
+      "label": "n5",
+      "props": {
+        "value": "element([number],5)",
+        "min": "0",
+        "max": "200"
+      }
+    },
+    "node24": {
+      "type": "stock",
+      "parent": "submodel4",
+      "label": "water",
+      "props": {
+        "initial": "100"
+      }
+    },
+    "node25": {
+      "type": "cloud",
+      "parent": "submodel4",
+      "label": "",
+      "props": {}
+    },
+    "node26": {
+      "type": "cloud",
+      "parent": "submodel4",
+      "label": "",
+      "props": {}
+    },
+    "node27": {
+      "type": "cloud",
+      "parent": "submodel4",
+      "label": "",
+      "props": {}
+    },
+    "node28": {
+      "type": "cloud",
+      "parent": "submodel4",
+      "label": "",
+      "props": {}
+    },
+    "node29": {
+      "type": "cloud",
+      "parent": "submodel4",
+      "label": "",
+      "props": {}
+    },
+    "node30": {
+      "type": "variable",
+      "parent": "submodel4",
+      "label": "water_demand",
+      "props": {
+        "value": "sum([water_use]*[number])"
+      }
+    },
+    "node31": {
+      "type": "variable",
+      "parent": "submodel4",
+      "label": "water_display",
+      "props": {
+        "value": "water",
+        "min": "0",
+        "max": "200"
+      }
+    },
+    "node32": {
+      "type": "variable",
+      "parent": "submodel1",
+      "label": "col",
+      "props": {
+        "value": "fmod(index(1)-1,15)+1"
+      }
+    },
+    "node33": {
+      "type": "variable",
+      "parent": "submodel1",
+      "label": "elevation",
+      "props": {
+        "value": "200-10*col*sin(0.7*row)",
+        "min": "0",
+        "max": "300"
+      }
+    },
+    "node34": {
+      "type": "variable",
+      "parent": "submodel1",
+      "label": "fuel_load",
+      "props": {
+        "value": "sum([number]*[fuel_per_indiv])",
+        "min": "0",
+        "max": "5000"
+      }
+    },
+    "node35": {
+      "type": "variable",
+      "parent": "submodel1",
+      "label": "fuel_lost",
+      "props": {
+        "value": "element([fuel_lost],index(1))"
+      }
+    },
+    "node36": {
+      "type": "variable",
+      "parent": "submodel1",
+      "label": "fraction_lost",
+      "props": {
+        "value": "fuel_lost/fuel_load"
+      }
+    },
+    "node37": {
+      "type": "condition",
+      "parent": "submodel5",
+      "label": "neighbour_condition",
+      "props": {
+        "expr": "abs(row-row_0)+abs(col-col_0)==1"
+      }
+    },
+    "node38": {
+      "type": "variable",
+      "parent": "submodel5",
+      "label": "interflow",
+      "props": {
+        "value": "max(0,0.005*elevation_diff*water)"
+      }
+    },
+    "node39": {
+      "type": "variable",
+      "parent": "submodel5",
+      "label": "elevation_diff",
+      "props": {
+        "value": "elevation-elevation_0"
+      }
+    },
+    "node40": {
+      "type": "variable",
+      "parent": "submodel5",
+      "label": "water",
+      "props": {
+        "value": "water"
+      }
+    },
+    "node41": {
+      "type": "variable",
+      "parent": "submodel5",
+      "label": "seeds_transfer",
+      "props": {
+        "value": "[seeds_dispersing]",
+        "units": "array(1,size(plant_species))"
+      }
+    },
+    "node42": {
+      "type": "variable",
+      "parent": null,
+      "label": "seeds_per_indiv",
+      "props": {
+        "value": "[70.0,60.0,25.0,20.0,20.0]",
+        "units": "array(1,size(plant_species))"
+      }
+    },
+    "node43": {
+      "type": "variable",
+      "parent": null,
+      "label": "dispersability",
+      "props": {
+        "value": "[0.2,0.2,0.15,0.1,0.05]",
+        "units": "array(1,size(plant_species))"
+      }
+    },
+    "node44": {
+      "type": "variable",
+      "parent": null,
+      "label": "fuel_per_indiv",
+      "props": {
+        "value": "[10.0,10.0,10.0,10.0,10.0]",
+        "units": "array(1,size(plant_species))"
+      }
+    },
+    "node45": {
+      "type": "stock",
+      "parent": "submodel8",
+      "label": "fuel_load",
+      "props": {
+        "initial": "element([fuel_load],index(1))"
+      }
+    },
+    "node46": {
+      "type": "stock",
+      "parent": "submodel8",
+      "label": "fuel_load_lost",
+      "props": {
+        "initial": "0"
+      }
+    },
+    "node47": {
+      "type": "variable",
+      "parent": "submodel8",
+      "label": "fire",
+      "props": {
+        "value": "crossover or new_fire",
+        "units": "boolean"
+      }
+    },
+    "node48": {
+      "type": "variable",
+      "parent": "submodel8",
+      "label": "new_fire",
+      "props": {
+        "value": "spark_here and starts",
+        "units": "boolean"
+      }
+    },
+    "node49": {
+      "type": "variable",
+      "parent": "submodel8",
+      "label": "crossover",
+      "props": {
+        "value": "neighbour_burns and catches",
+        "units": "boolean"
+      }
+    },
+    "node50": {
+      "type": "variable",
+      "parent": "submodel8",
+      "label": "catches",
+      "props": {
+        "value": "rand_var(0,1)<0.7*max(0,min(1,(fuel_load-min_for_fire)/(always_catch-min_for_fire)))",
+        "units": "boolean"
+      }
+    },
+    "node51": {
+      "type": "variable",
+      "parent": "submodel8",
+      "label": "starts",
+      "props": {
+        "value": "fuel_load>rand_const(min_for_fire,always_starts)",
+        "units": "boolean"
+      }
+    },
+    "node52": {
+      "type": "variable",
+      "parent": "submodel8",
+      "label": "spark_here",
+      "props": {
+        "value": "check_spark and spark_patch==index(1)",
+        "units": "boolean"
+      }
+    },
+    "node53": {
+      "type": "variable",
+      "parent": "submodel8",
+      "label": "neighbour_burns",
+      "props": {
+        "value": "any(element([other_fires],[neighbours]))",
+        "units": "boolean"
+      }
+    },
+    "node54": {
+      "type": "variable",
+      "parent": "submodel8",
+      "label": "old_fire",
+      "props": {
+        "value": "last(fire)",
+        "units": "boolean"
+      }
+    },
+    "node55": {
+      "type": "variable",
+      "parent": "submodel8",
+      "label": "neighbours",
+      "props": {
+        "value": "element([[neighbours]],index(1))",
+        "units": "array(1,4)"
+      }
+    },
+    "node56": {
+      "type": "variable",
+      "parent": "submodel7",
+      "label": "check_spark",
+      "props": {
+        "value": "spark_ and fmod(time(1),dt(1))<dt(2)",
+        "units": "boolean"
+      }
+    },
+    "node57": {
+      "type": "variable",
+      "parent": "submodel7",
+      "label": "burning",
+      "props": {
+        "value": "any([other_fires])",
+        "units": "boolean"
+      }
+    },
+    "node58": {
+      "type": "variable",
+      "parent": "submodel7",
+      "label": "other_fires",
+      "props": {
+        "value": "[old_fire]",
+        "units": "array(boolean,size(fire_patch))"
+      }
+    },
+    "node59": {
+      "type": "condition",
+      "parent": "submodel7",
+      "label": "is_fire_",
+      "props": {
+        "expr": "check_spark or burning"
+      }
+    },
+    "node60": {
+      "type": "variable",
+      "parent": "submodel9",
+      "label": "spark_",
+      "props": {
+        "value": "abs(time(1)-10)<0.001",
+        "units": "boolean"
+      }
+    },
+    "node61": {
+      "type": "variable",
+      "parent": "submodel9",
+      "label": "spark_patch",
+      "props": {
+        "value": "int(rand_var(1,size(fire_patch)+1))",
+        "units": "int"
+      }
+    },
+    "node62": {
+      "type": "variable",
+      "parent": "submodel10",
+      "label": "row",
+      "props": {
+        "value": "floor((index(1)-1)/nrow)+1",
+        "units": "int"
+      }
+    },
+    "node63": {
+      "type": "variable",
+      "parent": "submodel10",
+      "label": "col",
+      "props": {
+        "value": "fmod(index(1)-1,ncol)+1"
+      }
+    },
+    "node64": {
+      "type": "variable",
+      "parent": "submodel10",
+      "label": "row_neighbours",
+      "props": {
+        "value": "[row-1,row,row+1,row]",
+        "units": "array(int,4)"
+      }
+    },
+    "node65": {
+      "type": "variable",
+      "parent": "submodel10",
+      "label": "col_neighbours",
+      "props": {
+        "value": "[col,col+1,col,col-1]",
+        "units": "array(1,4)"
+      }
+    },
+    "node66": {
+      "type": "variable",
+      "parent": "submodel10",
+      "label": "neighbours",
+      "props": {
+        "value": "if [row_neighbours]>0 and [row_neighbours]<=nrow and [col_neighbours]>0 and [col_neighbours]<=ncol then ncol*([row_neighbours]-1)+[col_neighbours]else index(1)",
+        "units": "array(1,4)"
+      }
+    },
+    "node67": {
+      "type": "variable",
+      "parent": "submodel6",
+      "label": "always_catch",
+      "props": {
+        "value": "2500",
+        "units": "int"
+      }
+    },
+    "node68": {
+      "type": "variable",
+      "parent": "submodel6",
+      "label": "burnt_per_step",
+      "props": {
+        "value": "0.6"
+      }
+    },
+    "node69": {
+      "type": "variable",
+      "parent": "submodel6",
+      "label": "always_starts",
+      "props": {
+        "value": "1500",
+        "units": "int"
+      }
+    },
+    "node70": {
+      "type": "variable",
+      "parent": "submodel6",
+      "label": "min_for_fire",
+      "props": {
+        "value": "1000",
+        "units": "int"
+      }
+    },
+    "node71": {
+      "type": "variable",
+      "parent": "submodel6",
+      "label": "nrow",
+      "props": {
+        "value": "15",
+        "units": "int"
+      }
+    },
+    "node72": {
+      "type": "variable",
+      "parent": "submodel6",
+      "label": "ncol",
+      "props": {
+        "value": "15",
+        "units": "int"
+      }
+    },
+    "node73": {
+      "type": "variable",
+      "parent": "submodel11",
+      "label": "time_in_2",
+      "props": {
+        "value": "fmod(time(1),dt(1))"
+      }
+    },
+    "node74": {
+      "type": "variable",
+      "parent": "submodel11",
+      "label": "fuel_lost",
+      "props": {
+        "value": "if any({burning})then sum({[fuel_load_lost]})elseif time_in_2>0 and time_in_2<1.5*dt(2)then 0 else prev(1)",
+        "min": "0",
+        "max": "3000",
+        "units": "array(1,size(fire_patch))"
+      }
+    },
+    "node75": {
+      "type": "valve",
+      "parent": "submodel3",
+      "label": "reproduction",
+      "props": {
+        "rate": "0.01*(seeds_staying+seeds_in)*(1-feedback)*water_multiplier"
+      }
+    },
+    "node76": {
+      "type": "valve",
+      "parent": "submodel3",
+      "label": "mortality",
+      "props": {
+        "rate": "m*number"
+      }
+    },
+    "node77": {
+      "type": "valve",
+      "parent": "submodel3",
+      "label": "burnt",
+      "props": {
+        "rate": "fraction_lost*number"
+      }
+    },
+    "node78": {
+      "type": "valve",
+      "parent": "submodel4",
+      "label": "rain",
+      "props": {
+        "rate": "rain",
+        "units": "int"
+      }
+    },
+    "node79": {
+      "type": "valve",
+      "parent": "submodel4",
+      "label": "inflow",
+      "props": {
+        "rate": "sum({interflow_0})"
+      }
+    },
+    "node80": {
+      "type": "valve",
+      "parent": "submodel4",
+      "label": "outflow",
+      "props": {
+        "rate": "sum({interflow})"
+      }
+    },
+    "node81": {
+      "type": "valve",
+      "parent": "submodel4",
+      "label": "evapotransp",
+      "props": {
+        "rate": "if water>100 then water_demand else water_demand*water/100"
+      }
+    },
+    "node82": {
+      "type": "valve",
+      "parent": "submodel4",
+      "label": "drainage",
+      "props": {
+        "rate": "0.2*water"
+      }
+    },
+    "node83": {
+      "type": "valve",
+      "parent": "submodel8",
+      "label": "burning_losses",
+      "props": {
+        "rate": "if fire then fuel_load*burnt_per_step/dt(2)else 0"
+      }
+    }
+  },
+  "arcs": {
+    "arc1": {
+      "type": "flow",
+      "from": "node7",
+      "to": "node6",
+      "valve": "node75",
+      "props": {}
+    },
+    "arc2": {
+      "type": "flow",
+      "from": "node6",
+      "to": "node8",
+      "valve": "node76",
+      "props": {}
+    },
+    "arc3": {
+      "type": "flow",
+      "from": "node6",
+      "to": "node16",
+      "valve": "node77",
+      "props": {}
+    },
+    "arc4": {
+      "type": "flow",
+      "from": "node25",
+      "to": "node24",
+      "valve": "node78",
+      "props": {}
+    },
+    "arc5": {
+      "type": "flow",
+      "from": "node26",
+      "to": "node24",
+      "valve": "node79",
+      "props": {}
+    },
+    "arc6": {
+      "type": "flow",
+      "from": "node24",
+      "to": "node27",
+      "valve": "node80",
+      "props": {}
+    },
+    "arc7": {
+      "type": "flow",
+      "from": "node24",
+      "to": "node28",
+      "valve": "node81",
+      "props": {}
+    },
+    "arc8": {
+      "type": "flow",
+      "from": "node24",
+      "to": "node29",
+      "valve": "node82",
+      "props": {}
+    },
+    "arc9": {
+      "type": "flow",
+      "from": "node45",
+      "to": "node46",
+      "valve": "node83",
+      "props": {}
+    },
+    "arc10": {
+      "type": "role",
+      "from": "submodel1",
+      "to": "submodel5",
+      "label": "me",
+      "props": {}
+    },
+    "arc11": {
+      "type": "role",
+      "from": "submodel1",
+      "to": "submodel5",
+      "label": "my_neighbour",
+      "props": {}
+    },
+    "arc12": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node76",
+      "alias": "number",
+      "props": {}
+    },
+    "arc13": {
+      "type": "influence",
+      "from": "node9",
+      "to": "node75",
+      "alias": "feedback",
+      "props": {}
+    },
+    "arc14": {
+      "type": "influence",
+      "from": "node18",
+      "to": "node9",
+      "alias": "[numbers]",
+      "props": {}
+    },
+    "arc15": {
+      "type": "influence",
+      "from": "node10",
+      "to": "node9",
+      "alias": "[c]",
+      "props": {}
+    },
+    "arc16": {
+      "type": "influence",
+      "from": "node11",
+      "to": "node75",
+      "alias": "seeds_staying",
+      "props": {}
+    },
+    "arc17": {
+      "type": "influence",
+      "from": "node1",
+      "to": "node10",
+      "alias": "[[cs]]",
+      "props": {}
+    },
+    "arc18": {
+      "type": "influence",
+      "from": "node12",
+      "to": "node76",
+      "alias": "m",
+      "props": {}
+    },
+    "arc19": {
+      "type": "influence",
+      "from": "node2",
+      "to": "node12",
+      "alias": "[ms]",
+      "props": {}
+    },
+    "arc20": {
+      "type": "influence",
+      "from": "node13",
+      "to": "node75",
+      "alias": "water_multiplier",
+      "props": {}
+    },
+    "arc21": {
+      "type": "influence",
+      "from": "node14",
+      "to": "node11",
+      "alias": "seeds_dispersing",
+      "props": {}
+    },
+    "arc22": {
+      "type": "influence",
+      "from": "node15",
+      "to": "node11",
+      "alias": "seeds_produced",
+      "props": {}
+    },
+    "arc23": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node15",
+      "alias": "number",
+      "props": {}
+    },
+    "arc24": {
+      "type": "influence",
+      "from": "node15",
+      "to": "node14",
+      "alias": "seeds_produced",
+      "props": {}
+    },
+    "arc25": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node77",
+      "alias": "number",
+      "props": {}
+    },
+    "arc26": {
+      "type": "influence",
+      "from": "node42",
+      "to": "node15",
+      "alias": "[seeds_per_indiv]",
+      "props": {}
+    },
+    "arc27": {
+      "type": "influence",
+      "from": "node43",
+      "to": "node14",
+      "alias": "[dispersability]",
+      "props": {}
+    },
+    "arc28": {
+      "type": "influence",
+      "from": "node17",
+      "to": "node75",
+      "alias": "seeds_in",
+      "props": {}
+    },
+    "arc29": {
+      "type": "influence",
+      "from": "node41",
+      "to": "node17",
+      "alias": "seeds_transfer",
+      "props": {},
+      "roleAliases": {
+        "arc10": "seeds_transfer",
+        "arc11": "seeds_transfer_0"
+      }
+    },
+    "arc30": {
+      "type": "influence",
+      "from": "node36",
+      "to": "node77",
+      "alias": "fraction_lost",
+      "props": {}
+    },
+    "arc31": {
+      "type": "influence",
+      "from": "node24",
+      "to": "node13",
+      "alias": "water",
+      "props": {}
+    },
+    "arc32": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node18",
+      "alias": "[number]",
+      "props": {}
+    },
+    "arc33": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node19",
+      "alias": "[number]",
+      "props": {}
+    },
+    "arc34": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node20",
+      "alias": "[number]",
+      "props": {}
+    },
+    "arc35": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node21",
+      "alias": "[number]",
+      "props": {}
+    },
+    "arc36": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node22",
+      "alias": "[number]",
+      "props": {}
+    },
+    "arc37": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node23",
+      "alias": "[number]",
+      "props": {}
+    },
+    "arc38": {
+      "type": "influence",
+      "from": "node24",
+      "to": "node81",
+      "alias": "water",
+      "props": {}
+    },
+    "arc39": {
+      "type": "influence",
+      "from": "node24",
+      "to": "node82",
+      "alias": "water",
+      "props": {}
+    },
+    "arc40": {
+      "type": "influence",
+      "from": "node30",
+      "to": "node81",
+      "alias": "water_demand",
+      "props": {}
+    },
+    "arc41": {
+      "type": "influence",
+      "from": "node4",
+      "to": "node78",
+      "alias": "rain",
+      "props": {}
+    },
+    "arc42": {
+      "type": "influence",
+      "from": "node24",
+      "to": "node31",
+      "alias": "water",
+      "props": {}
+    },
+    "arc43": {
+      "type": "influence",
+      "from": "node38",
+      "to": "node79",
+      "alias": "interflow",
+      "props": {},
+      "roleAliases": {
+        "arc10": "interflow",
+        "arc11": "interflow_0"
+      }
+    },
+    "arc44": {
+      "type": "influence",
+      "from": "node38",
+      "to": "node80",
+      "alias": "interflow",
+      "props": {},
+      "roleAliases": {
+        "arc10": "interflow",
+        "arc11": "interflow_0"
+      }
+    },
+    "arc45": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node30",
+      "alias": "[number]",
+      "props": {}
+    },
+    "arc46": {
+      "type": "influence",
+      "from": "node3",
+      "to": "node30",
+      "alias": "[water_use]",
+      "props": {}
+    },
+    "arc47": {
+      "type": "influence",
+      "from": "node5",
+      "to": "node33",
+      "alias": "row",
+      "props": {}
+    },
+    "arc48": {
+      "type": "influence",
+      "from": "node32",
+      "to": "node33",
+      "alias": "col",
+      "props": {}
+    },
+    "arc49": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node34",
+      "alias": "[number]",
+      "props": {}
+    },
+    "arc50": {
+      "type": "influence",
+      "from": "node44",
+      "to": "node34",
+      "alias": "[fuel_per_indiv]",
+      "props": {}
+    },
+    "arc51": {
+      "type": "influence",
+      "from": "node34",
+      "to": "node36",
+      "alias": "fuel_load",
+      "props": {}
+    },
+    "arc52": {
+      "type": "influence",
+      "from": "node35",
+      "to": "node36",
+      "alias": "fuel_lost",
+      "props": {}
+    },
+    "arc53": {
+      "type": "influence",
+      "from": "node74",
+      "to": "node35",
+      "alias": "[fuel_lost]",
+      "props": {}
+    },
+    "arc54": {
+      "type": "influence",
+      "from": "node5",
+      "to": "node37",
+      "alias": "row",
+      "props": {},
+      "roleAliases": {
+        "arc10": "row",
+        "arc11": "row_0"
+      }
+    },
+    "arc55": {
+      "type": "influence",
+      "from": "node32",
+      "to": "node37",
+      "alias": "col",
+      "props": {},
+      "roleAliases": {
+        "arc10": "col",
+        "arc11": "col_0"
+      }
+    },
+    "arc56": {
+      "type": "influence",
+      "from": "node39",
+      "to": "node38",
+      "alias": "elevation_diff",
+      "props": {}
+    },
+    "arc57": {
+      "type": "influence",
+      "from": "node33",
+      "to": "node39",
+      "alias": "elevation",
+      "props": {},
+      "roleAliases": {
+        "arc10": "elevation",
+        "arc11": "elevation_0"
+      }
+    },
+    "arc58": {
+      "type": "influence",
+      "from": "node40",
+      "to": "node38",
+      "alias": "water",
+      "props": {}
+    },
+    "arc59": {
+      "type": "influence",
+      "from": "node24",
+      "to": "node40",
+      "alias": "water",
+      "props": {},
+      "roleAliases": {
+        "arc10": "water",
+        "arc11": "water_0"
+      }
+    },
+    "arc60": {
+      "type": "influence",
+      "from": "node14",
+      "to": "node41",
+      "alias": "seeds_dispersing",
+      "props": {},
+      "roleAliases": {
+        "arc10": "seeds_dispersing",
+        "arc11": "seeds_dispersing_0"
+      }
+    },
+    "arc61": {
+      "type": "influence",
+      "from": "node34",
+      "to": "node45",
+      "alias": "[fuel_load]",
+      "props": {}
+    },
+    "arc62": {
+      "type": "influence",
+      "from": "node45",
+      "to": "node83",
+      "alias": "fuel_load",
+      "props": {}
+    },
+    "arc63": {
+      "type": "influence",
+      "from": "node47",
+      "to": "node83",
+      "alias": "fire",
+      "props": {}
+    },
+    "arc64": {
+      "type": "influence",
+      "from": "node48",
+      "to": "node47",
+      "alias": "new_fire",
+      "props": {}
+    },
+    "arc65": {
+      "type": "influence",
+      "from": "node49",
+      "to": "node47",
+      "alias": "crossover",
+      "props": {}
+    },
+    "arc66": {
+      "type": "influence",
+      "from": "node50",
+      "to": "node49",
+      "alias": "catches",
+      "props": {}
+    },
+    "arc67": {
+      "type": "influence",
+      "from": "node45",
+      "to": "node50",
+      "alias": "fuel_load",
+      "props": {}
+    },
+    "arc68": {
+      "type": "influence",
+      "from": "node51",
+      "to": "node48",
+      "alias": "starts",
+      "props": {}
+    },
+    "arc69": {
+      "type": "influence",
+      "from": "node45",
+      "to": "node51",
+      "alias": "fuel_load",
+      "props": {}
+    },
+    "arc70": {
+      "type": "influence",
+      "from": "node52",
+      "to": "node48",
+      "alias": "spark_here",
+      "props": {}
+    },
+    "arc71": {
+      "type": "influence",
+      "from": "node53",
+      "to": "node49",
+      "alias": "neighbour_burns",
+      "props": {}
+    },
+    "arc72": {
+      "type": "influence",
+      "from": "node47",
+      "to": "node54",
+      "alias": "fire",
+      "props": {}
+    },
+    "arc73": {
+      "type": "influence",
+      "from": "node58",
+      "to": "node53",
+      "alias": "[other_fires]",
+      "props": {}
+    },
+    "arc74": {
+      "type": "influence",
+      "from": "node68",
+      "to": "node83",
+      "alias": "burnt_per_step",
+      "props": {}
+    },
+    "arc75": {
+      "type": "influence",
+      "from": "node67",
+      "to": "node50",
+      "alias": "always_catch",
+      "props": {}
+    },
+    "arc76": {
+      "type": "influence",
+      "from": "node70",
+      "to": "node50",
+      "alias": "min_for_fire",
+      "props": {}
+    },
+    "arc77": {
+      "type": "influence",
+      "from": "node69",
+      "to": "node51",
+      "alias": "always_starts",
+      "props": {}
+    },
+    "arc78": {
+      "type": "influence",
+      "from": "node70",
+      "to": "node51",
+      "alias": "min_for_fire",
+      "props": {}
+    },
+    "arc79": {
+      "type": "influence",
+      "from": "node61",
+      "to": "node52",
+      "alias": "spark_patch",
+      "props": {}
+    },
+    "arc80": {
+      "type": "influence",
+      "from": "node56",
+      "to": "node52",
+      "alias": "check_spark",
+      "props": {}
+    },
+    "arc81": {
+      "type": "influence",
+      "from": "node55",
+      "to": "node53",
+      "alias": "[neighbours]",
+      "props": {}
+    },
+    "arc82": {
+      "type": "influence",
+      "from": "node66",
+      "to": "node55",
+      "alias": "[[neighbours]]",
+      "props": {}
+    },
+    "arc83": {
+      "type": "influence",
+      "from": "node58",
+      "to": "node57",
+      "alias": "[other_fires]",
+      "props": {}
+    },
+    "arc84": {
+      "type": "influence",
+      "from": "node54",
+      "to": "node58",
+      "alias": "[old_fire]",
+      "props": {}
+    },
+    "arc85": {
+      "type": "influence",
+      "from": "node57",
+      "to": "node59",
+      "alias": "burning",
+      "props": {}
+    },
+    "arc86": {
+      "type": "influence",
+      "from": "node56",
+      "to": "node59",
+      "alias": "check_spark",
+      "props": {}
+    },
+    "arc87": {
+      "type": "influence",
+      "from": "node60",
+      "to": "node56",
+      "alias": "spark_",
+      "props": {}
+    },
+    "arc88": {
+      "type": "influence",
+      "from": "node62",
+      "to": "node64",
+      "alias": "row",
+      "props": {}
+    },
+    "arc89": {
+      "type": "influence",
+      "from": "node63",
+      "to": "node65",
+      "alias": "col",
+      "props": {}
+    },
+    "arc90": {
+      "type": "influence",
+      "from": "node64",
+      "to": "node66",
+      "alias": "[row_neighbours]",
+      "props": {}
+    },
+    "arc91": {
+      "type": "influence",
+      "from": "node65",
+      "to": "node66",
+      "alias": "[col_neighbours]",
+      "props": {}
+    },
+    "arc92": {
+      "type": "influence",
+      "from": "node71",
+      "to": "node62",
+      "alias": "nrow",
+      "props": {}
+    },
+    "arc93": {
+      "type": "influence",
+      "from": "node72",
+      "to": "node63",
+      "alias": "ncol",
+      "props": {}
+    },
+    "arc94": {
+      "type": "influence",
+      "from": "node71",
+      "to": "node66",
+      "alias": "nrow",
+      "props": {}
+    },
+    "arc95": {
+      "type": "influence",
+      "from": "node72",
+      "to": "node66",
+      "alias": "ncol",
+      "props": {}
+    },
+    "arc96": {
+      "type": "influence",
+      "from": "node57",
+      "to": "node74",
+      "alias": "{burning}",
+      "props": {}
+    },
+    "arc97": {
+      "type": "influence",
+      "from": "node73",
+      "to": "node74",
+      "alias": "time_in_2",
+      "props": {}
+    },
+    "arc98": {
+      "type": "influence",
+      "from": "node46",
+      "to": "node74",
+      "alias": "{[fuel_load_lost]}",
+      "props": {}
+    }
+  },
+  "layout": {
+    "submodel1": {
+      "x": 158.68063398621996,
+      "y": 146.79977521285008,
+      "w": 372.90712886355993,
+      "h": 402.70749146330013,
+      "fill": "#ffdfff"
+    },
+    "submodel2": {
+      "x": 158.59459717136502,
+      "y": 83.02411538576932,
+      "w": 291.29774204926997,
+      "h": 233.61687048980002,
+      "fill": "#80ff80"
+    },
+    "submodel3": {
+      "x": 150.15352113804505,
+      "y": 68.61279337386932,
+      "w": 250.51681431191,
+      "h": 164.9896213163001,
+      "fill": "#ffffff"
+    },
+    "submodel4": {
+      "x": 168.0253396087001,
+      "y": 282.3329212110004,
+      "w": 262.4461864226,
+      "h": 115.27278434300013,
+      "fill": "#80ffff"
+    },
+    "submodel5": {
+      "x": 439.27648103750005,
+      "y": 166.64155098405507,
+      "w": 73.2729016890001,
+      "h": 311.45357714169006,
+      "fill": "#f3f3f3"
+    },
+    "submodel6": {
+      "x": -298.1213076446191,
+      "y": 163.6048261903211,
+      "w": 418.02198871413987,
+      "h": 515.8538977595384,
+      "scale": 0.9838164150843787,
+      "fill": "#ff9b9b"
+    },
+    "submodel7": {
+      "x": -293.6069137475648,
+      "y": 130.2691034958227,
+      "w": 352.8654851522196,
+      "h": 335.3698953902229,
+      "scale": 1.1469555365375,
+      "fill": "#ffffb9"
+    },
+    "submodel8": {
+      "x": -282.248823622142,
+      "y": 107.97015025592133,
+      "w": 249.41577498918343,
+      "h": 241.62153202109585,
+      "fill": "#e2e2e2"
+    },
+    "submodel9": {
+      "x": -457.7156134509026,
+      "y": 356.50342122798156,
+      "w": 80.06990659836264,
+      "h": 66.98513059632091,
+      "fill": "#ffffff"
+    },
+    "submodel10": {
+      "x": -289.4003738904098,
+      "y": 360.3704027948749,
+      "w": 171.33909395472776,
+      "h": 83.58353486237708,
+      "fill": "#e2e2e2"
+    },
+    "submodel11": {
+      "x": -145.08062242052523,
+      "y": 374.27476332208573,
+      "w": 72.25434614873154,
+      "h": 79.79525924777687,
+      "fill": "#ffffb9"
+    },
+    "node1": {
+      "x": -57.64895090510001,
+      "y": 87.5861519731
+    },
+    "node2": {
+      "x": 241.8933942311,
+      "y": -88.41434207059999
+    },
+    "node3": {
+      "x": -57.47011698850001,
+      "y": 280.69703895699996
+    },
+    "node4": {
+      "x": -56.513941404899995,
+      "y": 324.34815199099995
+    },
+    "node5": {
+      "x": 323.3562616190001,
+      "y": 130.92952924360026
+    },
+    "node6": {
+      "x": 156.11820719300007,
+      "y": 60.676558403919465
+    },
+    "node7": {
+      "x": 48.75385820230007,
+      "y": 56.70010103381946
+    },
+    "node8": {
+      "x": 253.54141275900008,
+      "y": 59.68244406141944
+    },
+    "node9": {
+      "x": 73.52431756020002,
+      "y": 98.38816118601943
+    },
+    "node10": {
+      "x": 43.72285741310007,
+      "y": 85.49280008551943
+    },
+    "node11": {
+      "x": 76.37555872539997,
+      "y": 12.894574849300177
+    },
+    "node12": {
+      "x": 235.58953138900014,
+      "y": 17.936313584319457
+    },
+    "node13": {
+      "x": 105.00000000000004,
+      "y": 128.0000000000004
+    },
+    "node14": {
+      "x": 190.44295162700027,
+      "y": 14.878355595400173
+    },
+    "node15": {
+      "x": 138.86465222800012,
+      "y": 10.91079410330017
+    },
+    "node16": {
+      "x": 148.78355595900018,
+      "y": 130.9295292431004
+    },
+    "node17": {
+      "x": 234.08612804200038,
+      "y": 97.20525655910038
+    },
+    "node18": {
+      "x": 89.5503537274,
+      "y": 177.94869128066932
+    },
+    "node19": {
+      "x": 136.88087148200015,
+      "y": 182.50782864300015
+    },
+    "node20": {
+      "x": 165.64569230100017,
+      "y": 180.52404789700017
+    },
+    "node21": {
+      "x": 201.35374573100023,
+      "y": 179.53215752400018
+    },
+    "node22": {
+      "x": 235.07801841500026,
+      "y": 181.51593827000016
+    },
+    "node23": {
+      "x": 267.8104007260003,
+      "y": 179.53215752400018
+    },
+    "node24": {
+      "x": 153.14476004300008,
+      "y": 283.3114677675003
+    },
+    "node25": {
+      "x": 64.47287424940009,
+      "y": 243.01314140050025
+    },
+    "node26": {
+      "x": 67.44854536860008,
+      "y": 289.6319889335002
+    },
+    "node27": {
+      "x": 279.71308520400004,
+      "y": 291.6157696805002
+    },
+    "node28": {
+      "x": 271.77796222000006,
+      "y": 246.98070289250023
+    },
+    "node29": {
+      "x": 249.95637401200008,
+      "y": 325.34004236350023
+    },
+    "node30": {
+      "x": 153.00000000000009,
+      "y": 240.0000000000001
+    },
+    "node31": {
+      "x": 129.93763887100005,
+      "y": 318.39680975300024
+    },
+    "node32": {
+      "x": 322.36437124500014,
+      "y": 165.64569230100022
+    },
+    "node33": {
+      "x": 324.34815199200017,
+      "y": 215.24021095500024
+    },
+    "node34": {
+      "x": -1.9837807460299821,
+      "y": 203.3375264771002
+    },
+    "node35": {
+      "x": -3.9675614922199873,
+      "y": 259.87527774200026
+    },
+    "node36": {
+      "x": 2.9756711191700234,
+      "y": 233.09423766900017
+    },
+    "node37": {
+      "x": 438.233002635,
+      "y": 135.86517124860066
+    },
+    "node38": {
+      "x": 436.3047782280001,
+      "y": 301.56641988990066
+    },
+    "node39": {
+      "x": 434.32099748200005,
+      "y": 229.08302476790067
+    },
+    "node40": {
+      "x": 427.42141628000013,
+      "y": 268.7784812399007
+    },
+    "node41": {
+      "x": 425.358269332,
+      "y": 53.58985831480018
+    },
+    "node42": {
+      "x": 70.3924700075,
+      "y": -88.337767851358
+    },
+    "node43": {
+      "x": 121.93108630689994,
+      "y": -89.33362653430001
+    },
+    "node44": {
+      "x": -59.43405618459998,
+      "y": 206.27351449710002
+    },
+    "node45": {
+      "x": -313.4257954956207,
+      "y": 20.56328268147067
+    },
+    "node46": {
+      "x": -189.83137128124937,
+      "y": 19.44981940092303
+    },
+    "node47": {
+      "x": -350.04851086704326,
+      "y": 59.0675129988757
+    },
+    "node48": {
+      "x": -351.9936773973674,
+      "y": 100.02250858681742
+    },
+    "node49": {
+      "x": -291.72578019574394,
+      "y": 92.81682305150757
+    },
+    "node50": {
+      "x": -219.89487987495906,
+      "y": 97.39224908446171
+    },
+    "node51": {
+      "x": -323.4469650264059,
+      "y": 149.72502330108523
+    },
+    "node52": {
+      "x": -364.64510643100823,
+      "y": 190.92316470602606
+    },
+    "node53": {
+      "x": -265.54687440439244,
+      "y": 155.29233970670083
+    },
+    "node54": {
+      "x": -188.71790800012633,
+      "y": 150.83848658220828
+    },
+    "node55": {
+      "x": -231.75711151936935,
+      "y": 194.12175522554142
+    },
+    "node56": {
+      "x": -333.2576573457033,
+      "y": 257.5127155662743
+    },
+    "node57": {
+      "x": -265.7221723442501,
+      "y": 259.40584014378777
+    },
+    "node58": {
+      "x": -205.35412136663825,
+      "y": 259.8567560627608
+    },
+    "node59": {
+      "x": -423.54835232510663,
+      "y": 249.6064152645556
+    },
+    "node60": {
+      "x": -476.1818857191546,
+      "y": 340.2954154139025
+    },
+    "node61": {
+      "x": -449.9279407471845,
+      "y": 359.1202411229808
+    },
+    "node62": {
+      "x": -342.6539092416975,
+      "y": 338.03679800407906
+    },
+    "node63": {
+      "x": -339.72042088044253,
+      "y": 376.0877811853953
+    },
+    "node64": {
+      "x": -291.13828841514305,
+      "y": 340.0416701290007
+    },
+    "node65": {
+      "x": -277.2307318133197,
+      "y": 375.0958908123953
+    },
+    "node66": {
+      "x": -230.843293883647,
+      "y": 355.46899714161236
+    },
+    "node67": {
+      "x": -158.01769569451488,
+      "y": -65.25969574454022
+    },
+    "node68": {
+      "x": -240.1147480590949,
+      "y": -62.67816760643217
+    },
+    "node69": {
+      "x": -486.92328422291916,
+      "y": 142.9253766999346
+    },
+    "node70": {
+      "x": -161.14629641260905,
+      "y": 312.46603146799856
+    },
+    "node71": {
+      "x": -400.17328194738684,
+      "y": 338.71042510030173
+    },
+    "node72": {
+      "x": -398.4419776324605,
+      "y": 380.704209142589
+    },
+    "node73": {
+      "x": -155.7337666498113,
+      "y": 390.20718335196705
+    },
+    "node74": {
+      "x": -142.55022254557326,
+      "y": 356.87027328435545
+    },
+    "ports": {
+      "submodel3": {
+        "arc14": {
+          "x": 84.14370001981288,
+          "y": 151.10760403201937
+        },
+        "arc17": {
+          "x": 24.895113982090052,
+          "y": 85.88159745338795
+        },
+        "arc19": {
+          "x": 237.4755413287135,
+          "y": -13.882017284280721
+        },
+        "arc26": {
+          "x": 121.7599419364345,
+          "y": -13.882017284280721
+        },
+        "arc27": {
+          "x": 171.53507987347956,
+          "y": -13.882017284280721
+        },
+        "arc29": {
+          "x": 275.41192829400006,
+          "y": 87.78181818695096
+        },
+        "arc30": {
+          "x": 92.23827401653193,
+          "y": 151.10760403201937
+        },
+        "arc31": {
+          "x": 112.16309019083923,
+          "y": 151.10760403201937
+        },
+        "node6": {
+          "x": 104.78631404461663,
+          "y": 151.10760403201937
+        },
+        "node14": {
+          "x": 275.41192829400006,
+          "y": 28.880323638368672
+        }
+      },
+      "submodel1": {
+        "arc17": {
+          "x": -27.772930445560007,
+          "y": 86.96920506389561
+        },
+        "arc19": {
+          "x": 239.8863437175829,
+          "y": -54.553970518799986
+        },
+        "arc26": {
+          "x": 93.70011579598174,
+          "y": -54.553970518799986
+        },
+        "arc27": {
+          "x": 144.7962027754433,
+          "y": -54.553970518799986
+        },
+        "arc29": {
+          "x": 345.1341984179999,
+          "y": 71.88319041269328
+        },
+        "arc41": {
+          "x": -27.772930445560007,
+          "y": 313.71112218159516
+        },
+        "arc43": {
+          "x": 345.1341984179999,
+          "y": 297.34507792949444
+        },
+        "arc44": {
+          "x": 345.1341984179999,
+          "y": 296.1338211899462
+        },
+        "arc46": {
+          "x": -27.772930445560007,
+          "y": 274.95471517752793
+        },
+        "arc50": {
+          "x": -27.772930445560007,
+          "y": 204.6554772438422
+        },
+        "arc53": {
+          "x": -27.772930445560007,
+          "y": 276.5368257160602
+        },
+        "node5": {
+          "x": 345.1341984179999,
+          "y": 131.865211251087
+        },
+        "node32": {
+          "x": 345.1341984179999,
+          "y": 159.79339811792124
+        },
+        "node33": {
+          "x": 345.1341984179999,
+          "y": 217.85665112529284
+        },
+        "node24": {
+          "x": 345.1341984179999,
+          "y": 256.3749139468857
+        },
+        "node14": {
+          "x": 345.1341984179999,
+          "y": 40.36979940298169
+        },
+        "node34": {
+          "x": -27.772930445560007,
+          "y": 188.202791562629
+        }
+      },
+      "submodel2": {
+        "arc17": {
+          "x": 12.945726146730038,
+          "y": 86.12835514663206
+        },
+        "arc19": {
+          "x": 238.65523678899268,
+          "y": -33.78431985913069
+        },
+        "arc26": {
+          "x": 108.02922320687516,
+          "y": -33.78431985913069
+        },
+        "arc27": {
+          "x": 158.45075074258395,
+          "y": -33.78431985913069
+        },
+        "arc29": {
+          "x": 304.243468196,
+          "y": 81.2074206487565
+        },
+        "arc30": {
+          "x": 39.18919312990482,
+          "y": 199.83255063066935
+        },
+        "arc31": {
+          "x": 127.26726051270957,
+          "y": 199.83255063066935
+        },
+        "node6": {
+          "x": 131.21387568156845,
+          "y": 199.83255063066935
+        },
+        "node14": {
+          "x": 304.243468196,
+          "y": 33.63144947479601
+        }
+      },
+      "submodel5": {
+        "node41": {
+          "x": 402.64003019300003,
+          "y": 58.77025228526564
+        },
+        "node38": {
+          "x": 402.64003019300003,
+          "y": 300.0076888413233
+        },
+        "arc54": {
+          "x": 402.64003019300003,
+          "y": 134.3359307050942
+        },
+        "arc55": {
+          "x": 402.64003019300003,
+          "y": 145.01326640093487
+        },
+        "arc57": {
+          "x": 402.64003019300003,
+          "y": 225.09518822843333
+        },
+        "arc59": {
+          "x": 402.64003019300003,
+          "y": 265.0430579514408
+        },
+        "arc60": {
+          "x": 402.64003019300003,
+          "y": 49.84613830198358
+        }
+      },
+      "submodel4": {
+        "node24": {
+          "x": 134.97480646159923,
+          "y": 224.69652903950032
+        },
+        "arc41": {
+          "x": 36.8022463974001,
+          "y": 289.81189045318115
+        },
+        "arc43": {
+          "x": 299.2484328200001,
+          "y": 295.2204944497374
+        },
+        "arc44": {
+          "x": 299.2484328200001,
+          "y": 293.0427367290822
+        },
+        "arc45": {
+          "x": 144.6996641289472,
+          "y": 224.69652903950032
+        },
+        "arc46": {
+          "x": 36.8022463974001,
+          "y": 262.4682941823009
+        }
+      },
+      "submodel11": {
+        "node74": {
+          "x": -110.41290327601227,
+          "y": 334.3771336981973
+        },
+        "arc96": {
+          "x": -170.9762213499281,
+          "y": 334.3771336981973
+        },
+        "arc98": {
+          "x": -145.7020809052709,
+          "y": 334.3771336981973
+        }
+      },
+      "submodel6": {
+        "node74": {
+          "x": -89.11031328754916,
+          "y": 319.4672986202281
+        },
+        "arc61": {
+          "x": -89.11031328754916,
+          "y": 152.20606268723463
+        }
+      },
+      "submodel7": {
+        "arc61": {
+          "x": -117.17417117145501,
+          "y": 135.73638242639035
+        },
+        "arc74": {
+          "x": -243.6325230059499,
+          "y": -37.415844199288756
+        },
+        "arc75": {
+          "x": -168.61024736778123,
+          "y": -37.415844199288756
+        },
+        "arc76": {
+          "x": -165.1103234319077,
+          "y": 297.95405119093414
+        },
+        "arc77": {
+          "x": -470.03965632367465,
+          "y": 143.627635618073
+        },
+        "arc78": {
+          "x": -175.61901062525607,
+          "y": 297.95405119093414
+        },
+        "arc79": {
+          "x": -418.9141671855373,
+          "y": 297.95405119093414
+        },
+        "arc82": {
+          "x": -231.1690395939746,
+          "y": 297.95405119093414
+        },
+        "arc87": {
+          "x": -403.07957302597424,
+          "y": 297.95405119093414
+        },
+        "node57": {
+          "x": -217.00636737896554,
+          "y": 297.95405119093414
+        },
+        "node46": {
+          "x": -150.80587696036318,
+          "y": 297.95405119093414
+        }
+      },
+      "submodel8": {
+        "arc61": {
+          "x": -157.5409361275503,
+          "y": 112.04656348767591
+        },
+        "arc73": {
+          "x": -223.24300188149212,
+          "y": 228.78091626646926
+        },
+        "arc74": {
+          "x": -247.05462007685614,
+          "y": -12.840615754626597
+        },
+        "arc75": {
+          "x": -177.95932670615326,
+          "y": -12.840615754626597
+        },
+        "arc76": {
+          "x": -184.0053446912418,
+          "y": 228.78091626646926
+        },
+        "arc77": {
+          "x": -406.95671111673374,
+          "y": 146.2515124956244
+        },
+        "arc78": {
+          "x": -244.60497903488,
+          "y": 228.78091626646926
+        },
+        "arc79": {
+          "x": -383.84054325244625,
+          "y": 228.78091626646926
+        },
+        "arc80": {
+          "x": -346.8005912745487,
+          "y": 228.78091626646926
+        },
+        "arc82": {
+          "x": -231.56081344682457,
+          "y": 228.78091626646926
+        },
+        "node54": {
+          "x": -200.6119409609323,
+          "y": 228.78091626646926
+        },
+        "node46": {
+          "x": -160.4987845575016,
+          "y": 228.78091626646926
+        }
+      },
+      "submodel9": {
+        "node61": {
+          "x": -431.61899756999617,
+          "y": 323.0108559298211
+        },
+        "node60": {
+          "x": -446.3401152576403,
+          "y": 323.0108559298211
+        }
+      },
+      "submodel10": {
+        "node66": {
+          "x": -231.05222874228178,
+          "y": 318.5786353636864
+        },
+        "arc92": {
+          "x": -375.0699208677737,
+          "y": 338.4164319040265
+        },
+        "arc93": {
+          "x": -375.0699208677737,
+          "y": 378.8668018558363
+        },
+        "arc94": {
+          "x": -375.0699208677737,
+          "y": 341.1949022442638
+        },
+        "arc95": {
+          "x": -375.0699208677737,
+          "y": 377.18509554239097
+        }
+      }
+    }
+  }
+}
