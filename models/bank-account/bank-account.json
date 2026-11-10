@@ -1,0 +1,114 @@
+{
+  "id": "model",
+  "name": "Bank account",
+  "format": 3,
+  "schema": "simile-v1",
+  "enums": {},
+  "submodels": {},
+  "nodes": {
+    "node1": {
+      "type": "stock",
+      "parent": null,
+      "label": "account",
+      "props": {
+        "initial": "300",
+        "units": ""
+      }
+    },
+    "node2": {
+      "type": "cloud",
+      "parent": null,
+      "label": "",
+      "props": {}
+    },
+    "node3": {
+      "type": "valve",
+      "parent": null,
+      "label": "interest",
+      "props": {
+        "rate": "account*interest_rate",
+        "units": ""
+      }
+    },
+    "node4": {
+      "type": "cloud",
+      "parent": null,
+      "label": "",
+      "props": {}
+    },
+    "node5": {
+      "type": "valve",
+      "parent": null,
+      "label": "withdrawal",
+      "props": {
+        "rate": "10",
+        "units": ""
+      }
+    },
+    "node6": {
+      "type": "variable",
+      "parent": null,
+      "label": "interest_rate",
+      "props": {
+        "paramKind": "",
+        "value": "0.1",
+        "units": "",
+        "min": "",
+        "max": ""
+      }
+    }
+  },
+  "arcs": {
+    "arc1": {
+      "type": "flow",
+      "from": "node2",
+      "to": "node1",
+      "valve": "node3",
+      "props": {}
+    },
+    "arc2": {
+      "type": "flow",
+      "from": "node1",
+      "to": "node4",
+      "valve": "node5",
+      "props": {}
+    },
+    "arc3": {
+      "type": "influence",
+      "from": "node1",
+      "to": "node3",
+      "props": {},
+      "alias": "account"
+    },
+    "arc4": {
+      "type": "influence",
+      "from": "node6",
+      "to": "node3",
+      "props": {},
+      "alias": "interest_rate"
+    }
+  },
+  "layout": {
+    "node1": {
+      "x": 175,
+      "y": 121.66666666666666
+    },
+    "node2": {
+      "x": 63.888888888888886,
+      "y": 121.66666666666666
+    },
+    "node4": {
+      "x": 286.1111111111111,
+      "y": 121.66666666666666
+    },
+    "node6": {
+      "x": 108.33333333333333,
+      "y": 55
+    },
+    "arcs": {
+      "arc3": {
+        "bow": 0.48
+      }
+    }
+  }
+}

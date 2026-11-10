@@ -1,0 +1,210 @@
+{
+  "id": "model",
+  "name": "Trees",
+  "format": 3,
+  "schema": "simile-v1",
+  "enums": {},
+  "submodels": {
+    "submodel1": {
+      "kind": "population",
+      "parent": null,
+      "label": "tree",
+      "props": {
+        "dimensions": "",
+        "description": "",
+        "comment": "",
+        "timeBase": "",
+        "eqnUnits": "",
+        "index0": "",
+        "enumTypes": ""
+      }
+    }
+  },
+  "nodes": {
+    "node1": {
+      "type": "stock",
+      "parent": "submodel1",
+      "label": "size",
+      "props": {
+        "initial": "3",
+        "units": ""
+      }
+    },
+    "node2": {
+      "type": "cloud",
+      "parent": "submodel1",
+      "label": "",
+      "props": {}
+    },
+    "node3": {
+      "type": "valve",
+      "parent": "submodel1",
+      "label": "growth",
+      "props": {
+        "rate": "gr*(1-size/25)",
+        "units": ""
+      }
+    },
+    "node4": {
+      "type": "variable",
+      "parent": "submodel1",
+      "label": "gr",
+      "props": {
+        "paramKind": "",
+        "value": "rand_const(0.1,0.3)",
+        "units": "",
+        "min": "",
+        "max": ""
+      }
+    },
+    "node5": {
+      "type": "initialiser",
+      "parent": "submodel1",
+      "label": "initial",
+      "props": {
+        "expr": "5"
+      }
+    },
+    "node6": {
+      "type": "migrator",
+      "parent": "submodel1",
+      "label": "recruitment",
+      "props": {
+        "expr": "2"
+      }
+    },
+    "node7": {
+      "type": "exterminator",
+      "parent": "submodel1",
+      "label": "death",
+      "props": {
+        "expr": "size>17"
+      }
+    },
+    "node8": {
+      "type": "variable",
+      "parent": null,
+      "label": "total",
+      "props": {
+        "paramKind": "",
+        "value": "sum({size})",
+        "units": "",
+        "min": "",
+        "max": ""
+      }
+    },
+    "node9": {
+      "type": "variable",
+      "parent": "submodel1",
+      "label": "x",
+      "props": {
+        "paramKind": "",
+        "value": "rand_const(0,50)",
+        "units": "",
+        "min": "",
+        "max": ""
+      }
+    },
+    "node10": {
+      "type": "variable",
+      "parent": "submodel1",
+      "label": "y",
+      "props": {
+        "paramKind": "",
+        "value": "rand_const(0,100)",
+        "units": "",
+        "min": "",
+        "max": ""
+      }
+    }
+  },
+  "arcs": {
+    "arc1": {
+      "type": "flow",
+      "from": "node2",
+      "to": "node1",
+      "valve": "node3",
+      "props": {}
+    },
+    "arc2": {
+      "type": "influence",
+      "from": "node1",
+      "to": "node3",
+      "props": {},
+      "alias": "size"
+    },
+    "arc3": {
+      "type": "influence",
+      "from": "node4",
+      "to": "node3",
+      "props": {},
+      "alias": "gr"
+    },
+    "arc4": {
+      "type": "influence",
+      "from": "node1",
+      "to": "node7",
+      "props": {},
+      "alias": "size"
+    },
+    "arc5": {
+      "type": "influence",
+      "from": "node1",
+      "to": "node8",
+      "props": {},
+      "alias": "size"
+    }
+  },
+  "layout": {
+    "node1": {
+      "x": 280.55555555555554,
+      "y": 143.88888888888889
+    },
+    "node2": {
+      "x": 169.4444105360243,
+      "y": 143.88888888888889
+    },
+    "node4": {
+      "x": 202.7777608235677,
+      "y": 93.88888888888889
+    },
+    "submodel1": {
+      "x": 225.43672561645508,
+      "y": 102.63887405395508,
+      "w": 160.23761749267578,
+      "h": 142.5
+    },
+    "node5": {
+      "x": 188.8179168701172,
+      "y": 58.38887405395508
+    },
+    "node6": {
+      "x": 237.77774810791016,
+      "y": 58.38887405395508
+    },
+    "node7": {
+      "x": 280.55553436279297,
+      "y": 58.38887405395508
+    },
+    "node8": {
+      "x": 339.55553436279297,
+      "y": 108.88887405395508
+    },
+    "ports": {
+      "submodel1": {
+        "node1": {
+          "x": 305.55553436279297,
+          "y": 129.05838137319796
+        }
+      }
+    },
+    "node9": {
+      "x": 161.3179168701172,
+      "y": 76.38887405395508
+    },
+    "node10": {
+      "x": 161.3179168701172,
+      "y": 106.38887405395508
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "id": "model2",
+  "name": "Lotka-Volterra",
+  "format": 3,
+  "schema": "simile-v1",
+  "enums": {},
+  "submodels": {},
+  "nodes": {
+    "node1": {
+      "type": "stock",
+      "parent": null,
+      "label": "X",
+      "props": {
+        "initial": "5000",
+        "units": ""
+      }
+    },
+    "node2": {
+      "type": "stock",
+      "parent": null,
+      "label": "Y",
+      "props": {
+        "initial": "45",
+        "units": ""
+      }
+    },
+    "node3": {
+      "type": "cloud",
+      "parent": null,
+      "label": "",
+      "props": {}
+    },
+    "node4": {
+      "type": "valve",
+      "parent": null,
+      "label": "dXdt",
+      "props": {
+        "rate": "0.5*X - 0.01*X*Y",
+        "units": ""
+      }
+    },
+    "node5": {
+      "type": "cloud",
+      "parent": null,
+      "label": "",
+      "props": {}
+    },
+    "node6": {
+      "type": "valve",
+      "parent": null,
+      "label": "dYdt",
+      "props": {
+        "rate": "0.01*0.01*X*Y - 0.2*Y",
+        "units": ""
+      }
+    }
+  },
+  "arcs": {
+    "arc1": {
+      "type": "flow",
+      "from": "node3",
+      "to": "node1",
+      "valve": "node4",
+      "props": {}
+    },
+    "arc2": {
+      "type": "flow",
+      "from": "node5",
+      "to": "node2",
+      "valve": "node6",
+      "props": {}
+    },
+    "arc3": {
+      "type": "influence",
+      "from": "node1",
+      "to": "node4",
+      "props": {},
+      "alias": "X"
+    },
+    "arc4": {
+      "type": "influence",
+      "from": "node2",
+      "to": "node4",
+      "props": {},
+      "alias": "Y"
+    },
+    "arc5": {
+      "type": "influence",
+      "from": "node1",
+      "to": "node6",
+      "props": {},
+      "alias": "X"
+    },
+    "arc6": {
+      "type": "influence",
+      "from": "node2",
+      "to": "node6",
+      "props": {},
+      "alias": "Y"
+    }
+  },
+  "layout": {
+    "node1": {
+      "x": 159.44444444444443,
+      "y": 45
+    },
+    "node2": {
+      "x": 159.44444444444443,
+      "y": 156.11111111111111
+    },
+    "node3": {
+      "x": 65,
+      "y": 45
+    },
+    "node5": {
+      "x": 65,
+      "y": 156.11111111111111
+    }
+  }
+}
