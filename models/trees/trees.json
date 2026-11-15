@@ -11,6 +11,26 @@
       "spatial"
     ]
   },
+  "presentation": {
+    "run": {
+      "runLength": 300,
+      "logEach": 1
+    },
+    "displays": [
+      {
+        "widget": "plotter",
+        "variables": [
+          "node8"
+        ]
+      },
+      {
+        "widget": "plotter",
+        "variables": [
+          "node1"
+        ]
+      }
+    ]
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},

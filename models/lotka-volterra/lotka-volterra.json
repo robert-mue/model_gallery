@@ -11,6 +11,22 @@
       "differential equations"
     ]
   },
+  "presentation": {
+    "run": {
+      "runLength": 50,
+      "logEach": 0.5,
+      "timeStep": "0.1"
+    },
+    "displays": [
+      {
+        "widget": "plotter",
+        "variables": [
+          "node1",
+          "node2"
+        ]
+      }
+    ]
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},

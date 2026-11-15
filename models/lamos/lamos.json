@@ -13,6 +13,26 @@
       "grid"
     ]
   },
+  "presentation": {
+    "run": {
+      "runLength": 120,
+      "logEach": 1
+    },
+    "displays": [
+      {
+        "widget": "plotter",
+        "variables": [
+          "node24"
+        ]
+      },
+      {
+        "widget": "plotter",
+        "variables": [
+          "node34"
+        ]
+      }
+    ]
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},

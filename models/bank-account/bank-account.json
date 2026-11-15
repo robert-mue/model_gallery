@@ -10,6 +10,21 @@
       "stock and flow"
     ]
   },
+  "presentation": {
+    "run": {
+      "runLength": 10,
+      "logEach": 1,
+      "timeStep": "1"
+    },
+    "displays": [
+      {
+        "widget": "plotter",
+        "variables": [
+          "node1"
+        ]
+      }
+    ]
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},

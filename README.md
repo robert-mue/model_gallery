@@ -43,6 +43,27 @@ about it, in `metadata`, by hand:
 itself goes here: the panel works out its size (submodels / stocks /
 flows / variables) and the Simile features it uses from the model.
 
+### Its default displays
+
+And how it opens in Simile, in `presentation`: the plots (of its own
+stocks, flows and variables, named by element id) and the sliders, and the
+run settings. Opened from the gallery or the Sample models panel, the model
+is prepared and run once, so its graphs are drawn at once:
+
+```json
+"presentation": {
+  "run": { "runLength": 50, "logEach": 0.5, "timeStep": "0.1" },
+  "displays": [
+    { "widget": "plotter", "variables": ["node1", "node2"] },
+    { "widget": "sliders" }
+  ]
+}
+```
+
+No need to write it by hand: open the model in Simile, set up its
+Simulation panel as it should open, and in **Widgets › Metadata** select
+**Use the displays open now**; then save the model as its `<name>.json`.
+
 Copy an existing model's page to start one. More text, pictures, links to
 projects: as each model needs.
 
@@ -53,7 +74,8 @@ projects: as each model needs.
 2. List it in `index.html`, and in `models/index.json` (the list the
    Sample models panel reads).
 3. Run `python3 check/check.py`. It checks every model directory, its
-   metadata, its page, its link, its pictures, and both lists.
+   metadata and default displays, its page, its link, its pictures, and
+   both lists.
 4. Commit and push. GitHub Pages publishes it within a minute or two.
 
 Being in the gallery is being committed here: the curators are those with

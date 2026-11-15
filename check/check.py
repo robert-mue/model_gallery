@@ -4,7 +4,8 @@
 For every model directory, models/<name>/:
   - <name>.json is there and is a model spec (JSON, with nodes and arcs),
     with its metadata: a title, a description, keywords, and a paper
-    (citation and url) if it gives one;
+    (citation and url) if it gives one; and its default displays
+    (`presentation`: plots of its own stocks, flows and variables, sliders);
   - <name>.parameters.json, if there, is JSON;
   - index.html is there, has a title, and its "Open in Simile" link opens
     exactly this model's address on the published site;
@@ -89,6 +90,26 @@ for name in models:
                     bad(where, 'its metadata paper needs a citation and a url')
             for k in sorted(set(meta) - {'title', 'description', 'keywords', 'paper'}):
                 bad(where, 'its metadata has ' + k + ', which Simile does not show')
+        # Its default displays: what Simile opens it with (plots of element ids,
+        # the sliders) and the run settings. Optional, but each model here has some.
+        pr = m.get('presentation') if isinstance(m, dict) else None
+        if not isinstance(pr, dict): bad(where, name + '.json has no presentation (default displays)')
+        else:
+            run = pr.get('run', {})
+            if not isinstance(run, dict) or set(run) - {'runLength', 'logEach', 'timeStep'}:
+                bad(where, 'its presentation run has settings Simile does not take')
+            ds = pr.get('displays')
+            if not isinstance(ds, list) or not ds: bad(where, 'its presentation has no displays')
+            for i, disp in enumerate(ds if isinstance(ds, list) else []):
+                w = disp.get('widget') if isinstance(disp, dict) else None
+                if w == 'plotter':
+                    vs = disp.get('variables')
+                    if not isinstance(vs, list) or not vs: bad(where, 'its plot %d plots nothing' % (i + 1))
+                    for v in vs if isinstance(vs, list) else []:
+                        n = (m.get('nodes') or {}).get(v)
+                        if not n or n.get('type') not in ('stock', 'valve', 'variable'):
+                            bad(where, 'its plot %d names %s, which is not a stock, flow or variable' % (i + 1, v))
+                elif w != 'sliders': bad(where, 'its display %d is a %s, which Simile does not open' % (i + 1, w))
     except ValueError as e: bad(where, name + '.json is not JSON: ' + str(e))
     pf = os.path.join(d, name + '.parameters.json')
     if os.path.isfile(pf):

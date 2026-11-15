@@ -16,6 +16,31 @@
       "url": "https://doi.org/10.1111/1365-2664.14376"
     }
   },
+  "presentation": {
+    "run": {
+      "runLength": 50,
+      "logEach": 0.5,
+      "timeStep": "0.1"
+    },
+    "displays": [
+      {
+        "widget": "plotter",
+        "variables": [
+          "node1",
+          "node2"
+        ]
+      },
+      {
+        "widget": "plotter",
+        "variables": [
+          "node3"
+        ]
+      },
+      {
+        "widget": "sliders"
+      }
+    ]
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},
