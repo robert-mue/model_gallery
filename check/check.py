@@ -2,13 +2,16 @@
 """Check the gallery before a push: python3 check/check.py
 
 For every model directory, models/<name>/:
-  - <name>.json is there and is a model spec (JSON, with nodes and arcs);
+  - <name>.json is there and is a model spec (JSON, with nodes and arcs),
+    with its metadata: a title, a description, keywords, and a paper
+    (citation and url) if it gives one;
   - <name>.parameters.json, if there, is JSON;
   - index.html is there, has a title, and its "Open in Simile" link opens
     exactly this model's address on the published site;
   - every picture it shows is there, at the width and height the page says;
   - every link to a file in the gallery leads to one;
-and index.html lists every model directory, and nothing that is not one.
+and index.html, and models/index.json (the list Simile's Sample models
+panel reads), list every model directory, and nothing that is not one.
 Prints a line per problem, and exits non-zero if there were any."""
 import json, os, re, struct, sys
 from html.parser import HTMLParser
@@ -72,6 +75,20 @@ for name in models:
         m = json.load(open(spec, encoding='utf-8'))
         if not isinstance(m, dict) or not isinstance(m.get('nodes'), dict) or not isinstance(m.get('arcs'), dict):
             bad(where, name + '.json is not a model spec (no nodes and arcs)')
+        meta = m.get('metadata') if isinstance(m, dict) else None
+        if not isinstance(meta, dict): bad(where, name + '.json has no metadata')
+        else:
+            for k in ('title', 'description'):
+                if not isinstance(meta.get(k), str) or not meta[k].strip(): bad(where, 'its metadata has no ' + k)
+            kw = meta.get('keywords')
+            if not isinstance(kw, list) or not kw or not all(isinstance(x, str) and x.strip() for x in kw):
+                bad(where, 'its metadata has no keywords (a list of words)')
+            if 'paper' in meta:
+                pp = meta['paper']
+                if not isinstance(pp, dict) or not pp.get('citation') or not re.match(r'^https?://', pp.get('url') or ''):
+                    bad(where, 'its metadata paper needs a citation and a url')
+            for k in sorted(set(meta) - {'title', 'description', 'keywords', 'paper'}):
+                bad(where, 'its metadata has ' + k + ', which Simile does not show')
     except ValueError as e: bad(where, name + '.json is not JSON: ' + str(e))
     pf = os.path.join(d, name + '.parameters.json')
     if os.path.isfile(pf):
@@ -89,6 +106,12 @@ index = os.path.join(ROOT, 'index.html'); p = read(index); links(index, p)
 listed = sorted({m.group(1) for h in p.links for m in [re.match(r'^models/([^/]+)/?$', h)] if m})
 for n in sorted(set(models) - set(listed)): bad('index.html', 'does not list models/' + n)
 for n in sorted(set(listed) - set(models)): bad('index.html', 'lists models/' + n + ', which is not there')
+
+try:
+    li = json.load(open(os.path.join(ROOT, 'models', 'index.json'), encoding='utf-8'))['models']
+    for n in sorted(set(models) - set(li)): bad('models/index.json', 'does not list ' + n)
+    for n in sorted(set(li) - set(models)): bad('models/index.json', 'lists ' + n + ', which is not there')
+except (OSError, ValueError, KeyError, TypeError) as e: bad('models/index.json', 'is not a list of models: ' + str(e))
 
 for x in problems: print(x)
 print('%d models, %s' % (len(models), '%d problems' % len(problems) if problems else 'no problems'))

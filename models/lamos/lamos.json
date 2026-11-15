@@ -1,6 +1,18 @@
 {
   "id": "lamos1a",
   "name": "LAMOS",
+  "metadata": {
+    "title": "LAMOS: vegetation, water and fire in a landscape",
+    "description": "A 15 by 15 grid of patches, each holding populations of five plant species. Plants reproduce, die and spread seed to their neighbours; rain fills the soil water, which flows downhill; a fire lit at month 10 spreads from patch to patch.",
+    "keywords": [
+      "landscape",
+      "vegetation",
+      "fire",
+      "hydrology",
+      "spatial",
+      "grid"
+    ]
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},

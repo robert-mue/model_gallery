@@ -1,6 +1,16 @@
 {
   "id": "model",
   "name": "Trees",
+  "metadata": {
+    "title": "Trees",
+    "description": "A population of trees, each growing in size, with new trees recruited and old ones dying, and each placed at its own position. Shows a submodel whose instances come and go.",
+    "keywords": [
+      "forestry",
+      "individual-based",
+      "population",
+      "spatial"
+    ]
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},

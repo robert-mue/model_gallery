@@ -1,6 +1,21 @@
 {
   "id": "pangolin",
   "name": "Pangolin harvest",
+  "metadata": {
+    "title": "Pangolin harvest: bioeconomic drivers of extinction",
+    "description": "How harvesting can drive a rare species extinct: hunters take pangolins and a common species alongside them, and as pangolins get rarer their price rises, so they become more worth hunting.",
+    "keywords": [
+      "conservation",
+      "harvesting",
+      "bioeconomics",
+      "extinction risk",
+      "published model"
+    ],
+    "paper": {
+      "citation": "Almeida, R. J., Bonachela, J. A., & Lockwood, J. L. (2023). Multiple co-occurring bioeconomic drivers of overexploitation can accelerate rare species extinction risk. Journal of Applied Ecology, 60(5), 754-763.",
+      "url": "https://doi.org/10.1111/1365-2664.14376"
+    }
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},

@@ -1,6 +1,16 @@
 {
   "id": "model2",
   "name": "Lotka-Volterra",
+  "metadata": {
+    "title": "Lotka-Volterra predator-prey",
+    "description": "The classic predator-prey model, written straight from its two differential equations: a stock for each population, prey and predators, which rise and fall in turn.",
+    "keywords": [
+      "introductory",
+      "population dynamics",
+      "predator-prey",
+      "differential equations"
+    ]
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},

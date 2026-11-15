@@ -1,0 +1,9 @@
+{
+  "models": [
+    "bank-account",
+    "lotka-volterra",
+    "trees",
+    "lamos",
+    "pangolin"
+  ]
+}

@@ -1,6 +1,15 @@
 {
   "id": "model",
   "name": "Bank account",
+  "metadata": {
+    "title": "Bank account",
+    "description": "Money in an account earning interest each year, with a fixed amount taken out: one stock, an inflow, an outflow and an interest rate. The first model most people build in Simile.",
+    "keywords": [
+      "introductory",
+      "compound interest",
+      "stock and flow"
+    ]
+  },
   "format": 3,
   "schema": "simile-v1",
   "enums": {},

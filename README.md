@@ -13,7 +13,7 @@ Every model has its own directory, `models/<name>/`:
 
 | File | What it is |
 |---|---|
-| `<name>.json` | The model spec, exactly as Simile's **File › Save model as file…** writes it. Plain JSON: data, never run. |
+| `<name>.json` | The model spec, exactly as Simile's **File › Save model as file…** writes it, with its `metadata` (below). Plain JSON: data, never run. |
 | `<name>.parameters.json` | Optional: the model's parameter values, as the Parameters panel's **Save** writes them. The app loads it with the model. |
 | `index.html` | The model's page. |
 | pictures | Optional, as the page needs them. |
@@ -25,6 +25,24 @@ published paper if there is one, and the **Open in Simile** link:
 <a class="open" href="https://robert-mue.github.io/simile/index.html?open=https://robert-mue.github.io/model_gallery/models/<name>/<name>.json" target="_blank" rel="noopener">Open in Simile</a>
 ```
 
+### The model's metadata
+
+The model spec carries what Simile's **File › Sample models…** panel shows
+about it, in `metadata`, by hand:
+
+```json
+"metadata": {
+  "title": "Pangolin harvest: bioeconomic drivers of extinction",
+  "description": "One to three sentences: what the model is about.",
+  "keywords": ["conservation", "harvesting"],
+  "paper": { "citation": "Authors (year). Title. Journal, volume, pages.", "url": "https://doi.org/..." }
+}
+```
+
+`paper` only if there is one. Nothing that can be read from the model
+itself goes here: the panel works out its size (submodels / stocks /
+flows / variables) and the Simile features it uses from the model.
+
 Copy an existing model's page to start one. More text, pictures, links to
 projects: as each model needs.
 
@@ -32,9 +50,10 @@ projects: as each model needs.
 
 1. Make `models/<name>/` with the files above. Use lower case and hyphens
    for `<name>`.
-2. List it in `index.html`.
+2. List it in `index.html`, and in `models/index.json` (the list the
+   Sample models panel reads).
 3. Run `python3 check/check.py`. It checks every model directory, its
-   page, its link, its pictures, and the index.
+   metadata, its page, its link, its pictures, and both lists.
 4. Commit and push. GitHub Pages publishes it within a minute or two.
 
 Being in the gallery is being committed here: the curators are those with
