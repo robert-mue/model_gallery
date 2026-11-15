@@ -8,7 +8,8 @@
       "introductory",
       "compound interest",
       "stock and flow"
-    ]
+    ],
+    "page": "https://robert-mue.github.io/model_gallery/models/bank-account/"
   },
   "presentation": {
     "run": {

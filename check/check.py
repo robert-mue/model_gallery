@@ -88,7 +88,10 @@ for name in models:
                 pp = meta['paper']
                 if not isinstance(pp, dict) or not pp.get('citation') or not re.match(r'^https?://', pp.get('url') or ''):
                     bad(where, 'its metadata paper needs a citation and a url')
-            for k in sorted(set(meta) - {'title', 'description', 'keywords', 'paper'}):
+            # Its page here, as Simile's Metadata panel links to it.
+            want = 'https://robert-mue.github.io/model_gallery/models/' + name + '/'
+            if meta.get('page') != want: bad(where, 'its metadata page should be ' + want)
+            for k in sorted(set(meta) - {'title', 'description', 'keywords', 'page', 'paper'}):
                 bad(where, 'its metadata has ' + k + ', which Simile does not show')
         # Its default displays: what Simile opens it with (plots of element ids,
         # the sliders) and the run settings. Optional, but each model here has some.

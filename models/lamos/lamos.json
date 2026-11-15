@@ -11,7 +11,8 @@
       "hydrology",
       "spatial",
       "grid"
-    ]
+    ],
+    "page": "https://robert-mue.github.io/model_gallery/models/lamos/"
   },
   "presentation": {
     "run": {

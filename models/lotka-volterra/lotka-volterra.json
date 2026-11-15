@@ -9,7 +9,8 @@
       "population dynamics",
       "predator-prey",
       "differential equations"
-    ]
+    ],
+    "page": "https://robert-mue.github.io/model_gallery/models/lotka-volterra/"
   },
   "presentation": {
     "run": {

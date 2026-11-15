@@ -35,11 +35,14 @@ about it, in `metadata`, by hand:
   "title": "Pangolin harvest: bioeconomic drivers of extinction",
   "description": "One to three sentences: what the model is about.",
   "keywords": ["conservation", "harvesting"],
+  "page": "https://robert-mue.github.io/model_gallery/models/<name>/",
   "paper": { "citation": "Authors (year). Title. Journal, volume, pages.", "url": "https://doi.org/..." }
 }
 ```
 
-`paper` only if there is one. Nothing that can be read from the model
+`page` is the model's page here (its address exactly so: the check
+holds it to that); Simile's Metadata panel links to it. `paper` only if
+there is one. Nothing that can be read from the model
 itself goes here: the panel works out its size (submodels / stocks /
 flows / variables) and the Simile features it uses from the model.
 
