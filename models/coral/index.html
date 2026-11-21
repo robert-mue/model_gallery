@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coral acclimation — Simile model gallery</title>
+<link rel="stylesheet" href="../../gallery.css">
+</head>
+<body>
+<main>
+<p class="crumb"><a href="../../">Simile model gallery</a></p>
+<h1>Coral acclimation to a warming ocean</h1>
+<p class="lede">How far can coral reefs keep up with warming seas by acclimating? A coral community, its symbiotic algae and the energy the corals invest in that partnership, forced by monthly sea temperatures from 1955 to 2100. When the sea is too warm the algae are expelled: bleaching.</p>
+<p>It opens with the Great Barrier Reef under a moderate emissions scenario (RCP 4.5), after a 2000-year spin-up to equilibrium. Watch coral cover through the spin-up and then decline as bleaching becomes frequent late in the century.</p>
+<a class="open" href="https://robert-mue.github.io/simile/index.html?open=https://robert-mue.github.io/model_gallery/models/coral/coral.json" target="_blank" rel="noopener">Open in Simile</a>
+<p class="facts">From Raharinirina NA, Acevedo-Trejos E, Merico A (2022) Modelling the acclimation capacity of coral reefs to a warming ocean. <i>PLoS Computational Biology</i> 18(5): e1010099. <a href="https://doi.org/10.1371/journal.pcbi.1010099">The paper</a>; <a href="https://github.com/systemsecologygroup/CoralZooxProjection">the authors' code and data</a>.</p>
+<p class="facts">The model spec: <a href="coral.json">coral.json</a>; the temperatures and the region's constants: <a href="coral.parameters.json">coral.parameters.json</a> (the authors' data). Time in months, from January 1955.</p>
+<figure><img src="diagram.png" width="1000" height="515" alt="The coral acclimation model's diagram: three stocks, Coral, Trait and Symbiont, with the temperature-dependent growth curve on the left and bleaching on the right"><figcaption>The model's diagram: Coral, Trait and Symbiont in the middle; the temperature-limited growth curve on the left; bleaching on the right.</figcaption></figure>
+<p>Rebuilt in Simile from the paper and checked against the authors' own published runs: coral cover agrees to within about a percentage point over the whole run, and the trait to three or four figures. The symbionts differ only where a random bleaching event falls differently. The other two regions (South East Asia, the Caribbean) and scenarios can be run by loading their parameter files in Widgets › Parameters.</p>
+</main>
+</body>
+</html>

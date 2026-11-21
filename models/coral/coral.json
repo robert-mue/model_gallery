@@ -1,0 +1,1370 @@
+{
+ "format": 3,
+ "schema": "simile-v1",
+ "id": "coral_acclimation",
+ "name": "Coral acclimation",
+ "enums": {},
+ "nodes": {
+  "node1": {
+   "type": "variable",
+   "parent": null,
+   "label": "G_max",
+   "props": {
+    "value": "0.8333333333333334",
+    "units": ""
+   }
+  },
+  "node2": {
+   "type": "variable",
+   "parent": null,
+   "label": "a",
+   "props": {
+    "value": "0.08973333333333333",
+    "units": ""
+   }
+  },
+  "node3": {
+   "type": "variable",
+   "parent": null,
+   "label": "b",
+   "props": {
+    "value": "0.0633",
+    "units": ""
+   }
+  },
+  "node4": {
+   "type": "variable",
+   "parent": null,
+   "label": "alpha",
+   "props": {
+    "value": "0.001",
+    "units": ""
+   }
+  },
+  "node5": {
+   "type": "variable",
+   "parent": null,
+   "label": "M_C",
+   "props": {
+    "value": "0.0008333333333333334",
+    "units": ""
+   }
+  },
+  "node6": {
+   "type": "variable",
+   "parent": null,
+   "label": "Ksmax",
+   "props": {
+    "value": "3000000",
+    "units": ""
+   }
+  },
+  "node7": {
+   "type": "variable",
+   "parent": null,
+   "label": "beta",
+   "props": {
+    "value": "1200",
+    "units": ""
+   }
+  },
+  "node8": {
+   "type": "variable",
+   "parent": null,
+   "label": "gammaH",
+   "props": {
+    "value": "1000000",
+    "units": ""
+   }
+  },
+  "node9": {
+   "type": "variable",
+   "parent": null,
+   "label": "r",
+   "props": {
+    "value": "12000",
+    "units": ""
+   }
+  },
+  "node10": {
+   "type": "variable",
+   "parent": null,
+   "label": "tiny",
+   "props": {
+    "value": "0.01",
+    "units": ""
+   }
+  },
+  "node11": {
+   "type": "variable",
+   "parent": null,
+   "label": "K_C",
+   "props": {
+    "paramKind": "variable",
+    "value": "4387189023360000.0",
+    "units": ""
+   }
+  },
+  "node12": {
+   "type": "variable",
+   "parent": null,
+   "label": "T_bar",
+   "props": {
+    "paramKind": "variable",
+    "value": "26.78",
+    "units": ""
+   }
+  },
+  "node13": {
+   "type": "variable",
+   "parent": null,
+   "label": "sigma",
+   "props": {
+    "paramKind": "variable",
+    "value": "1.0",
+    "units": ""
+   }
+  },
+  "node14": {
+   "type": "variable",
+   "parent": null,
+   "label": "skew",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.0002",
+    "units": ""
+   }
+  },
+  "node15": {
+   "type": "variable",
+   "parent": null,
+   "label": "G_norm_max",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.19945601909862026",
+    "units": ""
+   }
+  },
+  "node16": {
+   "type": "variable",
+   "parent": null,
+   "label": "T_opt",
+   "props": {
+    "paramKind": "variable",
+    "value": "26.767845230153437",
+    "units": ""
+   }
+  },
+  "node17": {
+   "type": "variable",
+   "parent": null,
+   "label": "N",
+   "props": {
+    "paramKind": "variable",
+    "value": "5.54e-13",
+    "units": ""
+   }
+  },
+  "node18": {
+   "type": "variable",
+   "parent": null,
+   "label": "T_spinup",
+   "props": {
+    "paramKind": "variable",
+    "value": "25.906633533091973",
+    "units": ""
+   }
+  },
+  "node19": {
+   "type": "variable",
+   "parent": null,
+   "label": "tier1",
+   "props": {
+    "paramKind": "variable",
+    "value": "2",
+    "units": ""
+   }
+  },
+  "node20": {
+   "type": "variable",
+   "parent": null,
+   "label": "tier2",
+   "props": {
+    "paramKind": "variable",
+    "value": "4",
+    "units": ""
+   }
+  },
+  "node21": {
+   "type": "variable",
+   "parent": null,
+   "label": "tier3",
+   "props": {
+    "paramKind": "variable",
+    "value": "99",
+    "units": ""
+   }
+  },
+  "node22": {
+   "type": "variable",
+   "parent": null,
+   "label": "keep1",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.9",
+    "units": ""
+   }
+  },
+  "node23": {
+   "type": "variable",
+   "parent": null,
+   "label": "keep2",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.4",
+    "units": ""
+   }
+  },
+  "node24": {
+   "type": "variable",
+   "parent": null,
+   "label": "keep3",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.4",
+    "units": ""
+   }
+  },
+  "node25": {
+   "type": "variable",
+   "parent": null,
+   "label": "T_data",
+   "props": {
+    "paramKind": "variable",
+    "value": "25.906633533091973",
+    "units": ""
+   }
+  },
+  "node26": {
+   "type": "variable",
+   "parent": null,
+   "label": "T",
+   "props": {
+    "value": "if time()<0 then T_spinup else T_data",
+    "units": ""
+   }
+  },
+  "node27": {
+   "type": "variable",
+   "parent": null,
+   "label": "z",
+   "props": {
+    "value": "(T-T_bar)/sigma",
+    "units": ""
+   }
+  },
+  "node28": {
+   "type": "variable",
+   "parent": null,
+   "label": "pdf",
+   "props": {
+    "value": "exp(-0.5*z*z)/sqrt(2*pi())",
+    "units": ""
+   }
+  },
+  "node29": {
+   "type": "variable",
+   "parent": null,
+   "label": "w",
+   "props": {
+    "value": "abs(skew*z)/sqrt(2)",
+    "units": ""
+   }
+  },
+  "node30": {
+   "type": "variable",
+   "parent": null,
+   "label": "tt",
+   "props": {
+    "value": "1/(1+0.3275911*w)",
+    "units": ""
+   }
+  },
+  "node31": {
+   "type": "variable",
+   "parent": null,
+   "label": "erf_w",
+   "props": {
+    "value": "1-(0.254829592*tt-0.284496736*tt^2+1.421413741*tt^3-1.453152027*tt^4+1.061405429*tt^5)*exp(-(w*w))",
+    "units": ""
+   }
+  },
+  "node32": {
+   "type": "variable",
+   "parent": null,
+   "label": "cdf",
+   "props": {
+    "value": "0.5*(1+sgn(skew*z)*erf_w)",
+    "units": ""
+   }
+  },
+  "node33": {
+   "type": "variable",
+   "parent": null,
+   "label": "G_C",
+   "props": {
+    "value": "G_max*pdf*cdf/G_norm_max",
+    "units": ""
+   }
+  },
+  "node34": {
+   "type": "stock",
+   "parent": null,
+   "label": "Coral",
+   "props": {
+    "initial": "0.75*K_C",
+    "units": ""
+   }
+  },
+  "node35": {
+   "type": "stock",
+   "parent": null,
+   "label": "Trait",
+   "props": {
+    "initial": "0.0000005",
+    "units": ""
+   }
+  },
+  "node36": {
+   "type": "stock",
+   "parent": null,
+   "label": "Symbiont",
+   "props": {
+    "initial": "0.001",
+    "units": ""
+   }
+  },
+  "node37": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node38": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node39": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node40": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node41": {
+   "type": "variable",
+   "parent": null,
+   "label": "K_S",
+   "props": {
+    "value": "Ksmax*Coral",
+    "units": ""
+   }
+  },
+  "node42": {
+   "type": "variable",
+   "parent": null,
+   "label": "kappa",
+   "props": {
+    "value": "Symbiont/(gammaH*Coral+Symbiont+tiny)",
+    "units": ""
+   }
+  },
+  "node43": {
+   "type": "variable",
+   "parent": null,
+   "label": "E",
+   "props": {
+    "value": "1-exp(-beta*Trait)",
+    "units": ""
+   }
+  },
+  "node44": {
+   "type": "variable",
+   "parent": null,
+   "label": "cost",
+   "props": {
+    "value": "Symbiont/(K_S+tiny)",
+    "units": ""
+   }
+  },
+  "node45": {
+   "type": "variable",
+   "parent": null,
+   "label": "fitness",
+   "props": {
+    "value": "G_C*kappa*E*(1-Coral/K_C)-alpha*exp(r*Trait)*cost-M_C",
+    "units": ""
+   }
+  },
+  "node46": {
+   "type": "valve",
+   "parent": null,
+   "label": "coral_change",
+   "props": {
+    "rate": "fitness*Coral",
+    "units": ""
+   }
+  },
+  "node47": {
+   "type": "variable",
+   "parent": null,
+   "label": "gradient",
+   "props": {
+    "value": "G_C*beta*kappa*(1-Coral/K_C)*exp(-beta*Trait)-r*alpha*cost*exp(r*Trait)",
+    "units": ""
+   }
+  },
+  "node48": {
+   "type": "valve",
+   "parent": null,
+   "label": "acclimation",
+   "props": {
+    "rate": "N*gradient",
+    "units": ""
+   }
+  },
+  "node49": {
+   "type": "variable",
+   "parent": null,
+   "label": "G_S",
+   "props": {
+    "value": "a*exp(b*T)",
+    "units": ""
+   }
+  },
+  "node50": {
+   "type": "valve",
+   "parent": null,
+   "label": "symbiont_growth",
+   "props": {
+    "rate": "G_S*(1-Symbiont/(K_S+tiny))*Symbiont",
+    "units": ""
+   }
+  },
+  "node51": {
+   "type": "variable",
+   "parent": null,
+   "label": "excess",
+   "props": {
+    "value": "T-T_opt",
+    "units": ""
+   }
+  },
+  "node52": {
+   "type": "variable",
+   "parent": null,
+   "label": "keep_max",
+   "props": {
+    "value": "if excess>=tier3 then keep3 elseif excess>=tier2 then keep2 elseif excess>=tier1 then keep1 else 1.0",
+    "units": ""
+   }
+  },
+  "node53": {
+   "type": "variable",
+   "parent": null,
+   "label": "month_start",
+   "props": {
+    "value": "abs(time()-round(time()))<dt()/2",
+    "units": ""
+   }
+  },
+  "node54": {
+   "type": "variable",
+   "parent": null,
+   "label": "kept",
+   "props": {
+    "value": "if month_start and keep_max<1.0 then rand_var(0.05,keep_max) else 1.0",
+    "units": ""
+   }
+  },
+  "node55": {
+   "type": "valve",
+   "parent": null,
+   "label": "bleaching",
+   "props": {
+    "rate": "(1-kept)*Symbiont/dt()",
+    "units": ""
+   }
+  },
+  "node56": {
+   "type": "variable",
+   "parent": null,
+   "label": "coral_cover",
+   "props": {
+    "value": "100*Coral/K_C",
+    "units": ""
+   }
+  },
+  "node57": {
+   "type": "variable",
+   "parent": null,
+   "label": "symbionts_per_cm2",
+   "props": {
+    "value": "Symbiont/(Coral+tiny)",
+    "units": ""
+   }
+  }
+ },
+ "arcs": {
+  "arc1": {
+   "type": "influence",
+   "props": {},
+   "from": "node18",
+   "to": "node26",
+   "alias": "T_spinup"
+  },
+  "arc2": {
+   "type": "influence",
+   "props": {},
+   "from": "node25",
+   "to": "node26",
+   "alias": "T_data"
+  },
+  "arc3": {
+   "type": "influence",
+   "props": {},
+   "from": "node26",
+   "to": "node27",
+   "alias": "T"
+  },
+  "arc4": {
+   "type": "influence",
+   "props": {},
+   "from": "node12",
+   "to": "node27",
+   "alias": "T_bar"
+  },
+  "arc5": {
+   "type": "influence",
+   "props": {},
+   "from": "node13",
+   "to": "node27",
+   "alias": "sigma"
+  },
+  "arc6": {
+   "type": "influence",
+   "props": {},
+   "from": "node27",
+   "to": "node28",
+   "alias": "z"
+  },
+  "arc7": {
+   "type": "influence",
+   "props": {},
+   "from": "node14",
+   "to": "node29",
+   "alias": "skew"
+  },
+  "arc8": {
+   "type": "influence",
+   "props": {},
+   "from": "node27",
+   "to": "node29",
+   "alias": "z"
+  },
+  "arc9": {
+   "type": "influence",
+   "props": {},
+   "from": "node29",
+   "to": "node30",
+   "alias": "w"
+  },
+  "arc10": {
+   "type": "influence",
+   "props": {},
+   "from": "node30",
+   "to": "node31",
+   "alias": "tt"
+  },
+  "arc11": {
+   "type": "influence",
+   "props": {},
+   "from": "node29",
+   "to": "node31",
+   "alias": "w"
+  },
+  "arc12": {
+   "type": "influence",
+   "props": {},
+   "from": "node14",
+   "to": "node32",
+   "alias": "skew"
+  },
+  "arc13": {
+   "type": "influence",
+   "props": {},
+   "from": "node27",
+   "to": "node32",
+   "alias": "z"
+  },
+  "arc14": {
+   "type": "influence",
+   "props": {},
+   "from": "node31",
+   "to": "node32",
+   "alias": "erf_w"
+  },
+  "arc15": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node33",
+   "alias": "G_max"
+  },
+  "arc16": {
+   "type": "influence",
+   "props": {},
+   "from": "node28",
+   "to": "node33",
+   "alias": "pdf"
+  },
+  "arc17": {
+   "type": "influence",
+   "props": {},
+   "from": "node32",
+   "to": "node33",
+   "alias": "cdf"
+  },
+  "arc18": {
+   "type": "influence",
+   "props": {},
+   "from": "node15",
+   "to": "node33",
+   "alias": "G_norm_max"
+  },
+  "arc19": {
+   "type": "influence",
+   "props": {},
+   "from": "node11",
+   "to": "node34",
+   "alias": "K_C"
+  },
+  "arc20": {
+   "type": "influence",
+   "props": {},
+   "from": "node6",
+   "to": "node41",
+   "alias": "Ksmax"
+  },
+  "arc21": {
+   "type": "influence",
+   "props": {},
+   "from": "node34",
+   "to": "node41",
+   "alias": "Coral"
+  },
+  "arc22": {
+   "type": "influence",
+   "props": {},
+   "from": "node36",
+   "to": "node42",
+   "alias": "Symbiont"
+  },
+  "arc23": {
+   "type": "influence",
+   "props": {},
+   "from": "node8",
+   "to": "node42",
+   "alias": "gammaH"
+  },
+  "arc24": {
+   "type": "influence",
+   "props": {},
+   "from": "node34",
+   "to": "node42",
+   "alias": "Coral"
+  },
+  "arc25": {
+   "type": "influence",
+   "props": {},
+   "from": "node10",
+   "to": "node42",
+   "alias": "tiny"
+  },
+  "arc26": {
+   "type": "influence",
+   "props": {},
+   "from": "node7",
+   "to": "node43",
+   "alias": "beta"
+  },
+  "arc27": {
+   "type": "influence",
+   "props": {},
+   "from": "node35",
+   "to": "node43",
+   "alias": "Trait"
+  },
+  "arc28": {
+   "type": "influence",
+   "props": {},
+   "from": "node36",
+   "to": "node44",
+   "alias": "Symbiont"
+  },
+  "arc29": {
+   "type": "influence",
+   "props": {},
+   "from": "node41",
+   "to": "node44",
+   "alias": "K_S"
+  },
+  "arc30": {
+   "type": "influence",
+   "props": {},
+   "from": "node10",
+   "to": "node44",
+   "alias": "tiny"
+  },
+  "arc31": {
+   "type": "influence",
+   "props": {},
+   "from": "node33",
+   "to": "node45",
+   "alias": "G_C"
+  },
+  "arc32": {
+   "type": "influence",
+   "props": {},
+   "from": "node42",
+   "to": "node45",
+   "alias": "kappa"
+  },
+  "arc33": {
+   "type": "influence",
+   "props": {},
+   "from": "node43",
+   "to": "node45",
+   "alias": "E"
+  },
+  "arc34": {
+   "type": "influence",
+   "props": {},
+   "from": "node34",
+   "to": "node45",
+   "alias": "Coral"
+  },
+  "arc35": {
+   "type": "influence",
+   "props": {},
+   "from": "node11",
+   "to": "node45",
+   "alias": "K_C"
+  },
+  "arc36": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node45",
+   "alias": "alpha"
+  },
+  "arc37": {
+   "type": "influence",
+   "props": {},
+   "from": "node9",
+   "to": "node45",
+   "alias": "r"
+  },
+  "arc38": {
+   "type": "influence",
+   "props": {},
+   "from": "node35",
+   "to": "node45",
+   "alias": "Trait"
+  },
+  "arc39": {
+   "type": "influence",
+   "props": {},
+   "from": "node44",
+   "to": "node45",
+   "alias": "cost"
+  },
+  "arc40": {
+   "type": "influence",
+   "props": {},
+   "from": "node5",
+   "to": "node45",
+   "alias": "M_C"
+  },
+  "arc41": {
+   "type": "flow",
+   "props": {},
+   "from": "node37",
+   "to": "node34",
+   "valve": "node46"
+  },
+  "arc42": {
+   "type": "influence",
+   "props": {},
+   "from": "node45",
+   "to": "node46",
+   "alias": "fitness"
+  },
+  "arc43": {
+   "type": "influence",
+   "props": {},
+   "from": "node34",
+   "to": "node46",
+   "alias": "Coral"
+  },
+  "arc44": {
+   "type": "influence",
+   "props": {},
+   "from": "node33",
+   "to": "node47",
+   "alias": "G_C"
+  },
+  "arc45": {
+   "type": "influence",
+   "props": {},
+   "from": "node7",
+   "to": "node47",
+   "alias": "beta"
+  },
+  "arc46": {
+   "type": "influence",
+   "props": {},
+   "from": "node42",
+   "to": "node47",
+   "alias": "kappa"
+  },
+  "arc47": {
+   "type": "influence",
+   "props": {},
+   "from": "node34",
+   "to": "node47",
+   "alias": "Coral"
+  },
+  "arc48": {
+   "type": "influence",
+   "props": {},
+   "from": "node11",
+   "to": "node47",
+   "alias": "K_C"
+  },
+  "arc49": {
+   "type": "influence",
+   "props": {},
+   "from": "node35",
+   "to": "node47",
+   "alias": "Trait"
+  },
+  "arc50": {
+   "type": "influence",
+   "props": {},
+   "from": "node9",
+   "to": "node47",
+   "alias": "r"
+  },
+  "arc51": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node47",
+   "alias": "alpha"
+  },
+  "arc52": {
+   "type": "influence",
+   "props": {},
+   "from": "node44",
+   "to": "node47",
+   "alias": "cost"
+  },
+  "arc53": {
+   "type": "flow",
+   "props": {},
+   "from": "node38",
+   "to": "node35",
+   "valve": "node48"
+  },
+  "arc54": {
+   "type": "influence",
+   "props": {},
+   "from": "node17",
+   "to": "node48",
+   "alias": "N"
+  },
+  "arc55": {
+   "type": "influence",
+   "props": {},
+   "from": "node47",
+   "to": "node48",
+   "alias": "gradient"
+  },
+  "arc56": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node49",
+   "alias": "a"
+  },
+  "arc57": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node49",
+   "alias": "b"
+  },
+  "arc58": {
+   "type": "influence",
+   "props": {},
+   "from": "node26",
+   "to": "node49",
+   "alias": "T"
+  },
+  "arc59": {
+   "type": "flow",
+   "props": {},
+   "from": "node39",
+   "to": "node36",
+   "valve": "node50"
+  },
+  "arc60": {
+   "type": "influence",
+   "props": {},
+   "from": "node49",
+   "to": "node50",
+   "alias": "G_S"
+  },
+  "arc61": {
+   "type": "influence",
+   "props": {},
+   "from": "node36",
+   "to": "node50",
+   "alias": "Symbiont"
+  },
+  "arc62": {
+   "type": "influence",
+   "props": {},
+   "from": "node41",
+   "to": "node50",
+   "alias": "K_S"
+  },
+  "arc63": {
+   "type": "influence",
+   "props": {},
+   "from": "node10",
+   "to": "node50",
+   "alias": "tiny"
+  },
+  "arc64": {
+   "type": "influence",
+   "props": {},
+   "from": "node26",
+   "to": "node51",
+   "alias": "T"
+  },
+  "arc65": {
+   "type": "influence",
+   "props": {},
+   "from": "node16",
+   "to": "node51",
+   "alias": "T_opt"
+  },
+  "arc66": {
+   "type": "influence",
+   "props": {},
+   "from": "node51",
+   "to": "node52",
+   "alias": "excess"
+  },
+  "arc67": {
+   "type": "influence",
+   "props": {},
+   "from": "node19",
+   "to": "node52",
+   "alias": "tier1"
+  },
+  "arc68": {
+   "type": "influence",
+   "props": {},
+   "from": "node20",
+   "to": "node52",
+   "alias": "tier2"
+  },
+  "arc69": {
+   "type": "influence",
+   "props": {},
+   "from": "node21",
+   "to": "node52",
+   "alias": "tier3"
+  },
+  "arc70": {
+   "type": "influence",
+   "props": {},
+   "from": "node22",
+   "to": "node52",
+   "alias": "keep1"
+  },
+  "arc71": {
+   "type": "influence",
+   "props": {},
+   "from": "node23",
+   "to": "node52",
+   "alias": "keep2"
+  },
+  "arc72": {
+   "type": "influence",
+   "props": {},
+   "from": "node24",
+   "to": "node52",
+   "alias": "keep3"
+  },
+  "arc73": {
+   "type": "influence",
+   "props": {},
+   "from": "node53",
+   "to": "node54",
+   "alias": "month_start"
+  },
+  "arc74": {
+   "type": "influence",
+   "props": {},
+   "from": "node52",
+   "to": "node54",
+   "alias": "keep_max"
+  },
+  "arc75": {
+   "type": "flow",
+   "props": {},
+   "from": "node36",
+   "to": "node40",
+   "valve": "node55"
+  },
+  "arc76": {
+   "type": "influence",
+   "props": {},
+   "from": "node54",
+   "to": "node55",
+   "alias": "kept"
+  },
+  "arc77": {
+   "type": "influence",
+   "props": {},
+   "from": "node36",
+   "to": "node55",
+   "alias": "Symbiont"
+  },
+  "arc78": {
+   "type": "influence",
+   "props": {},
+   "from": "node34",
+   "to": "node56",
+   "alias": "Coral"
+  },
+  "arc79": {
+   "type": "influence",
+   "props": {},
+   "from": "node11",
+   "to": "node56",
+   "alias": "K_C"
+  },
+  "arc80": {
+   "type": "influence",
+   "props": {},
+   "from": "node36",
+   "to": "node57",
+   "alias": "Symbiont"
+  },
+  "arc81": {
+   "type": "influence",
+   "props": {},
+   "from": "node34",
+   "to": "node57",
+   "alias": "Coral"
+  },
+  "arc82": {
+   "type": "influence",
+   "props": {},
+   "from": "node10",
+   "to": "node57",
+   "alias": "tiny"
+  }
+ },
+ "submodels": {},
+ "layout": {
+  "arcs": {},
+  "node1": {
+   "x": 60,
+   "y": 40
+  },
+  "node2": {
+   "x": 900,
+   "y": 560
+  },
+  "node3": {
+   "x": 980,
+   "y": 560
+  },
+  "node4": {
+   "x": 520,
+   "y": 40
+  },
+  "node5": {
+   "x": 620,
+   "y": 40
+  },
+  "node6": {
+   "x": 1060,
+   "y": 640
+  },
+  "node7": {
+   "x": 420,
+   "y": 300
+  },
+  "node8": {
+   "x": 260,
+   "y": 330
+  },
+  "node9": {
+   "x": 520,
+   "y": 300
+  },
+  "node10": {
+   "x": 720,
+   "y": 640
+  },
+  "node11": {
+   "x": 820,
+   "y": 40
+  },
+  "node12": {
+   "x": 60,
+   "y": 120
+  },
+  "node13": {
+   "x": 60,
+   "y": 180
+  },
+  "node14": {
+   "x": 60,
+   "y": 240
+  },
+  "node15": {
+   "x": 60,
+   "y": 300
+  },
+  "node16": {
+   "x": 1180,
+   "y": 360
+  },
+  "node17": {
+   "x": 620,
+   "y": 220
+  },
+  "node18": {
+   "x": 160,
+   "y": 640
+  },
+  "node19": {
+   "x": 1180,
+   "y": 420
+  },
+  "node20": {
+   "x": 1180,
+   "y": 470
+  },
+  "node21": {
+   "x": 1180,
+   "y": 520
+  },
+  "node22": {
+   "x": 1260,
+   "y": 420
+  },
+  "node23": {
+   "x": 1260,
+   "y": 470
+  },
+  "node24": {
+   "x": 1260,
+   "y": 520
+  },
+  "node25": {
+   "x": 60,
+   "y": 640
+  },
+  "node26": {
+   "x": 160,
+   "y": 560
+  },
+  "node27": {
+   "x": 160,
+   "y": 150
+  },
+  "node28": {
+   "x": 250,
+   "y": 110
+  },
+  "node29": {
+   "x": 250,
+   "y": 190
+  },
+  "node30": {
+   "x": 330,
+   "y": 230
+  },
+  "node31": {
+   "x": 330,
+   "y": 170
+  },
+  "node32": {
+   "x": 410,
+   "y": 150
+  },
+  "node33": {
+   "x": 360,
+   "y": 80
+  },
+  "node34": {
+   "x": 700,
+   "y": 150
+  },
+  "node35": {
+   "x": 700,
+   "y": 360
+  },
+  "node36": {
+   "x": 700,
+   "y": 560
+  },
+  "node37": {
+   "x": 560,
+   "y": 150
+  },
+  "node38": {
+   "x": 560,
+   "y": 360
+  },
+  "node39": {
+   "x": 560,
+   "y": 560
+  },
+  "node40": {
+   "x": 840,
+   "y": 560
+  },
+  "node41": {
+   "x": 900,
+   "y": 640
+  },
+  "node42": {
+   "x": 420,
+   "y": 380
+  },
+  "node43": {
+   "x": 470,
+   "y": 230
+  },
+  "node44": {
+   "x": 820,
+   "y": 300
+  },
+  "node45": {
+   "x": 560,
+   "y": 80
+  },
+  "node47": {
+   "x": 560,
+   "y": 290
+  },
+  "node49": {
+   "x": 940,
+   "y": 500
+  },
+  "node51": {
+   "x": 1060,
+   "y": 360
+  },
+  "node52": {
+   "x": 1060,
+   "y": 440
+  },
+  "node53": {
+   "x": 1200,
+   "y": 600
+  },
+  "node54": {
+   "x": 980,
+   "y": 470
+  },
+  "node56": {
+   "x": 840,
+   "y": 100
+  },
+  "node57": {
+   "x": 840,
+   "y": 620
+  }
+ },
+ "props": {
+  "comment": ""
+ },
+ "metadata": {
+  "title": "Acclimation capacity of coral reefs to a warming ocean",
+  "description": "A trait-based model of a coral community (Coral, cm2), its symbiotic algae (Symbiont, cells) and the energy corals invest in the symbiosis (Trait), which moves up the gradient of coral fitness at the speed of acclimation N. Forced by monthly sea-surface temperature 1955-2100 after a 2000-year spin-up; symbionts are expelled (bleaching) when the temperature exceeds the optimum for coral growth by a regional threshold. Time is in months; time 0 is January 1955. Opens with the Great Barrier Reef under RCP 4.5; the other regions and scenarios are parameter files.",
+  "keywords": [
+   "coral",
+   "bleaching",
+   "acclimation",
+   "climate change",
+   "trait-based"
+  ],
+  "paper": {
+   "citation": "Raharinirina NA, Acevedo-Trejos E, Merico A (2022) Modelling the acclimation capacity of coral reefs to a warming ocean. PLoS Comput Biol 18(5): e1010099.",
+   "url": "https://doi.org/10.1371/journal.pcbi.1010099"
+  },
+  "page": "https://robert-mue.github.io/model_gallery/models/coral/"
+ },
+ "presentation": {
+  "run": {
+   "startTime": -24012,
+   "runLength": 25764,
+   "logEach": 12,
+   "timeStep": "0.125"
+  },
+  "displays": [
+   {
+    "widget": "plotter",
+    "variables": [
+     "node56"
+    ]
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node35"
+    ]
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node57"
+    ]
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node26"
+    ]
+   }
+  ]
+ }
+}

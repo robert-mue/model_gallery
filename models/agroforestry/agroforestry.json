@@ -1,0 +1,798 @@
+{
+ "format": 3,
+ "schema": "simile-v1",
+ "id": "agroforestry",
+ "name": "Agroforestry",
+ "enums": {},
+ "nodes": {
+  "node1": {
+   "type": "variable",
+   "parent": null,
+   "label": "planting_rate",
+   "props": {
+    "paramKind": "variable",
+    "value": "5",
+    "min": "0",
+    "max": "10",
+    "units": ""
+   }
+  },
+  "node2": {
+   "type": "variable",
+   "parent": null,
+   "label": "harvest_height",
+   "props": {
+    "paramKind": "variable",
+    "value": "16",
+    "min": "5",
+    "max": "20",
+    "units": ""
+   }
+  },
+  "node3": {
+   "type": "variable",
+   "parent": null,
+   "label": "grazing_rate",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.5",
+    "min": "0",
+    "max": "1.5",
+    "units": ""
+   }
+  },
+  "node4": {
+   "type": "variable",
+   "parent": null,
+   "label": "crown_lai",
+   "props": {
+    "paramKind": "variable",
+    "value": "3",
+    "min": "0",
+    "max": "6",
+    "units": ""
+   }
+  },
+  "node5": {
+   "type": "variable",
+   "parent": null,
+   "label": "extinction_k",
+   "props": {
+    "value": "0.5",
+    "units": ""
+   }
+  },
+  "node6": {
+   "type": "variable",
+   "parent": null,
+   "label": "growth_rate",
+   "props": {
+    "value": "1.5",
+    "units": ""
+   }
+  },
+  "node7": {
+   "type": "variable",
+   "parent": null,
+   "label": "max_height",
+   "props": {
+    "value": "20",
+    "units": ""
+   }
+  },
+  "node8": {
+   "type": "variable",
+   "parent": null,
+   "label": "pasture_growth_rate",
+   "props": {
+    "value": "2",
+    "units": ""
+   }
+  },
+  "node9": {
+   "type": "variable",
+   "parent": null,
+   "label": "pasture_capacity",
+   "props": {
+    "value": "4",
+    "units": ""
+   }
+  },
+  "node10": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "col",
+   "props": {
+    "value": "fmod(index(1)-1,40)",
+    "units": ""
+   }
+  },
+  "node11": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "row",
+   "props": {
+    "value": "floor((index(1)-1)/40)",
+    "units": ""
+   }
+  },
+  "node12": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "px",
+   "props": {
+    "value": "2.5*col+1.25",
+    "units": ""
+   }
+  },
+  "node13": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "py",
+   "props": {
+    "value": "2.5*row+1.25",
+    "units": ""
+   }
+  },
+  "node14": {
+   "type": "stock",
+   "parent": "submodel1",
+   "label": "Pasture",
+   "props": {
+    "initial": "pasture_capacity",
+    "units": ""
+   }
+  },
+  "node15": {
+   "type": "cloud",
+   "parent": "submodel1",
+   "label": "",
+   "props": {}
+  },
+  "node16": {
+   "type": "cloud",
+   "parent": "submodel1",
+   "label": "",
+   "props": {}
+  },
+  "node17": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "light",
+   "props": {
+    "value": "exp(-extinction_k*sum({cover_ground}))",
+    "units": ""
+   }
+  },
+  "node18": {
+   "type": "valve",
+   "parent": "submodel1",
+   "label": "pasture_growth",
+   "props": {
+    "rate": "pasture_growth_rate*light*Pasture*(1-Pasture/pasture_capacity)",
+    "units": ""
+   }
+  },
+  "node19": {
+   "type": "valve",
+   "parent": "submodel1",
+   "label": "grazing",
+   "props": {
+    "rate": "grazing_rate*Pasture",
+    "units": ""
+   }
+  },
+  "node20": {
+   "type": "initialiser",
+   "parent": "submodel2",
+   "label": "initial_trees",
+   "props": {
+    "expr": "20"
+   }
+  },
+  "node21": {
+   "type": "migrator",
+   "parent": "submodel2",
+   "label": "planting",
+   "props": {
+    "expr": "planting_rate"
+   }
+  },
+  "node22": {
+   "type": "exterminator",
+   "parent": "submodel2",
+   "label": "felling",
+   "props": {
+    "expr": "Height>harvest_height"
+   }
+  },
+  "node23": {
+   "type": "stock",
+   "parent": "submodel2",
+   "label": "Height",
+   "props": {
+    "initial": "1",
+    "units": ""
+   }
+  },
+  "node24": {
+   "type": "cloud",
+   "parent": "submodel2",
+   "label": "",
+   "props": {}
+  },
+  "node25": {
+   "type": "valve",
+   "parent": "submodel2",
+   "label": "height_growth",
+   "props": {
+    "rate": "growth_rate*(1-Height/max_height)",
+    "units": ""
+   }
+  },
+  "node26": {
+   "type": "variable",
+   "parent": "submodel2",
+   "label": "x",
+   "props": {
+    "value": "rand_const(0,100)",
+    "units": ""
+   }
+  },
+  "node27": {
+   "type": "variable",
+   "parent": "submodel2",
+   "label": "y",
+   "props": {
+    "value": "rand_const(0,100)",
+    "units": ""
+   }
+  },
+  "node28": {
+   "type": "variable",
+   "parent": "submodel2",
+   "label": "crown_radius",
+   "props": {
+    "value": "0.3*Height",
+    "units": ""
+   }
+  },
+  "node29": {
+   "type": "variable",
+   "parent": "submodel2",
+   "label": "volume",
+   "props": {
+    "value": "0.0004*Height^3",
+    "units": ""
+   }
+  },
+  "node30": {
+   "type": "condition",
+   "parent": "submodel3",
+   "label": "overhead",
+   "props": {
+    "expr": "hypot(px_ground-x_crown,py_ground-y_crown)<crown_radius_crown"
+   }
+  },
+  "node31": {
+   "type": "variable",
+   "parent": "submodel3",
+   "label": "cover",
+   "props": {
+    "value": "crown_lai*(1-(hypot(px_ground-x_crown,py_ground-y_crown)/crown_radius_crown)^2)",
+    "units": ""
+   }
+  },
+  "node32": {
+   "type": "variable",
+   "parent": null,
+   "label": "mean_pasture",
+   "props": {
+    "value": "sum([Pasture])/1600",
+    "units": ""
+   }
+  },
+  "node33": {
+   "type": "variable",
+   "parent": null,
+   "label": "number_of_trees",
+   "props": {
+    "value": "count({Height})",
+    "units": ""
+   }
+  },
+  "node34": {
+   "type": "variable",
+   "parent": null,
+   "label": "standing_timber",
+   "props": {
+    "value": "sum({volume})",
+    "units": ""
+   }
+  }
+ },
+ "arcs": {
+  "arc1": {
+   "type": "influence",
+   "props": {},
+   "from": "node10",
+   "to": "node12",
+   "alias": "col"
+  },
+  "arc2": {
+   "type": "influence",
+   "props": {},
+   "from": "node11",
+   "to": "node13",
+   "alias": "row"
+  },
+  "arc3": {
+   "type": "influence",
+   "props": {},
+   "from": "node9",
+   "to": "node14",
+   "alias": "pasture_capacity"
+  },
+  "arc4": {
+   "type": "flow",
+   "props": {},
+   "from": "node15",
+   "to": "node14",
+   "valve": "node18"
+  },
+  "arc5": {
+   "type": "flow",
+   "props": {},
+   "from": "node14",
+   "to": "node16",
+   "valve": "node19"
+  },
+  "arc6": {
+   "type": "influence",
+   "props": {},
+   "from": "node8",
+   "to": "node18",
+   "alias": "pasture_growth_rate"
+  },
+  "arc7": {
+   "type": "influence",
+   "props": {},
+   "from": "node17",
+   "to": "node18",
+   "alias": "light"
+  },
+  "arc8": {
+   "type": "influence",
+   "props": {},
+   "from": "node14",
+   "to": "node18",
+   "alias": "Pasture"
+  },
+  "arc9": {
+   "type": "influence",
+   "props": {},
+   "from": "node9",
+   "to": "node18",
+   "alias": "pasture_capacity"
+  },
+  "arc10": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node19",
+   "alias": "grazing_rate"
+  },
+  "arc11": {
+   "type": "influence",
+   "props": {},
+   "from": "node14",
+   "to": "node19",
+   "alias": "Pasture"
+  },
+  "arc12": {
+   "type": "influence",
+   "props": {},
+   "from": "node5",
+   "to": "node17",
+   "alias": "extinction_k"
+  },
+  "arc13": {
+   "type": "flow",
+   "props": {},
+   "from": "node24",
+   "to": "node23",
+   "valve": "node25"
+  },
+  "arc14": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node21",
+   "alias": "planting_rate"
+  },
+  "arc15": {
+   "type": "influence",
+   "props": {},
+   "from": "node23",
+   "to": "node22",
+   "alias": "Height"
+  },
+  "arc16": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node22",
+   "alias": "harvest_height"
+  },
+  "arc17": {
+   "type": "influence",
+   "props": {},
+   "from": "node6",
+   "to": "node25",
+   "alias": "growth_rate"
+  },
+  "arc18": {
+   "type": "influence",
+   "props": {},
+   "from": "node23",
+   "to": "node25",
+   "alias": "Height"
+  },
+  "arc19": {
+   "type": "influence",
+   "props": {},
+   "from": "node7",
+   "to": "node25",
+   "alias": "max_height"
+  },
+  "arc20": {
+   "type": "influence",
+   "props": {},
+   "from": "node23",
+   "to": "node28",
+   "alias": "Height"
+  },
+  "arc21": {
+   "type": "influence",
+   "props": {},
+   "from": "node23",
+   "to": "node29",
+   "alias": "Height"
+  },
+  "arc22": {
+   "type": "role",
+   "props": {},
+   "from": "submodel1",
+   "to": "submodel3",
+   "label": "ground"
+  },
+  "arc23": {
+   "type": "role",
+   "props": {},
+   "from": "submodel2",
+   "to": "submodel3",
+   "label": "crown"
+  },
+  "arc24": {
+   "type": "influence",
+   "props": {},
+   "from": "node12",
+   "to": "node30",
+   "alias": "px"
+  },
+  "arc25": {
+   "type": "influence",
+   "props": {},
+   "from": "node13",
+   "to": "node30",
+   "alias": "py"
+  },
+  "arc26": {
+   "type": "influence",
+   "props": {},
+   "from": "node26",
+   "to": "node30",
+   "alias": "x"
+  },
+  "arc27": {
+   "type": "influence",
+   "props": {},
+   "from": "node27",
+   "to": "node30",
+   "alias": "y"
+  },
+  "arc28": {
+   "type": "influence",
+   "props": {},
+   "from": "node28",
+   "to": "node30",
+   "alias": "crown_radius"
+  },
+  "arc29": {
+   "type": "influence",
+   "props": {},
+   "from": "node12",
+   "to": "node31",
+   "alias": "px"
+  },
+  "arc30": {
+   "type": "influence",
+   "props": {},
+   "from": "node13",
+   "to": "node31",
+   "alias": "py"
+  },
+  "arc31": {
+   "type": "influence",
+   "props": {},
+   "from": "node26",
+   "to": "node31",
+   "alias": "x"
+  },
+  "arc32": {
+   "type": "influence",
+   "props": {},
+   "from": "node27",
+   "to": "node31",
+   "alias": "y"
+  },
+  "arc33": {
+   "type": "influence",
+   "props": {},
+   "from": "node28",
+   "to": "node31",
+   "alias": "crown_radius"
+  },
+  "arc34": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node31",
+   "alias": "crown_lai"
+  },
+  "arc35": {
+   "type": "influence",
+   "props": {},
+   "from": "node31",
+   "to": "node17",
+   "alias": "cover"
+  },
+  "arc36": {
+   "type": "influence",
+   "props": {},
+   "from": "node14",
+   "to": "node32",
+   "alias": "Pasture"
+  },
+  "arc37": {
+   "type": "influence",
+   "props": {},
+   "from": "node23",
+   "to": "node33",
+   "alias": "Height"
+  },
+  "arc38": {
+   "type": "influence",
+   "props": {},
+   "from": "node29",
+   "to": "node34",
+   "alias": "volume"
+  }
+ },
+ "submodels": {
+  "submodel1": {
+   "kind": "fixed-membership",
+   "parent": null,
+   "label": "patch",
+   "props": {
+    "dimensions": "1600"
+   }
+  },
+  "submodel2": {
+   "kind": "population",
+   "parent": null,
+   "label": "tree",
+   "props": {}
+  },
+  "submodel3": {
+   "kind": "single",
+   "parent": null,
+   "label": "shading",
+   "props": {}
+  }
+ },
+ "layout": {
+  "arcs": {},
+  "submodel1": {
+   "x": 270,
+   "y": 300,
+   "w": 420,
+   "h": 300
+  },
+  "submodel2": {
+   "x": 880,
+   "y": 300,
+   "w": 400,
+   "h": 300
+  },
+  "submodel3": {
+   "x": 570,
+   "y": 590,
+   "w": 340,
+   "h": 150
+  },
+  "node1": {
+   "x": 820,
+   "y": 90
+  },
+  "node2": {
+   "x": 930,
+   "y": 90
+  },
+  "node3": {
+   "x": 360,
+   "y": 90
+  },
+  "node4": {
+   "x": 860,
+   "y": 590
+  },
+  "node5": {
+   "x": 150,
+   "y": 510
+  },
+  "node6": {
+   "x": 1040,
+   "y": 90
+  },
+  "node7": {
+   "x": 1140,
+   "y": 300
+  },
+  "node8": {
+   "x": 130,
+   "y": 90
+  },
+  "node9": {
+   "x": 240,
+   "y": 90
+  },
+  "node10": {
+   "x": 100,
+   "y": 190
+  },
+  "node11": {
+   "x": 100,
+   "y": 240
+  },
+  "node12": {
+   "x": 180,
+   "y": 190
+  },
+  "node13": {
+   "x": 180,
+   "y": 240
+  },
+  "node14": {
+   "x": 280,
+   "y": 320
+  },
+  "node15": {
+   "x": 110,
+   "y": 320
+  },
+  "node16": {
+   "x": 430,
+   "y": 320
+  },
+  "node17": {
+   "x": 200,
+   "y": 400
+  },
+  "node20": {
+   "x": 730,
+   "y": 200
+  },
+  "node21": {
+   "x": 820,
+   "y": 200
+  },
+  "node22": {
+   "x": 930,
+   "y": 200
+  },
+  "node23": {
+   "x": 920,
+   "y": 300
+  },
+  "node24": {
+   "x": 760,
+   "y": 300
+  },
+  "node26": {
+   "x": 740,
+   "y": 400
+  },
+  "node27": {
+   "x": 810,
+   "y": 400
+  },
+  "node28": {
+   "x": 950,
+   "y": 400
+  },
+  "node29": {
+   "x": 1030,
+   "y": 330
+  },
+  "node30": {
+   "x": 490,
+   "y": 590
+  },
+  "node31": {
+   "x": 650,
+   "y": 590
+  },
+  "node32": {
+   "x": 280,
+   "y": 520
+  },
+  "node33": {
+   "x": 930,
+   "y": 520
+  },
+  "node34": {
+   "x": 1040,
+   "y": 520
+  }
+ },
+ "props": {
+  "comment": ""
+ },
+ "metadata": {
+  "title": "Trees over pasture",
+  "description": "A silvopastoral field, 100 m square: individual trees, planted and felled, grow over a pasture of 1600 patches 2.5 m square. Each patch gets the light that passes the tree crowns directly above it (a vertical sun), by Beer's law; a crown intercepts most at its centre, its leaf area falling to nothing at its edge. Shaded pasture grows more slowly, and under deep shade gives way to grazing. Time is in years, heights and distances in metres, pasture in tonnes per hectare, timber in cubic metres.",
+  "keywords": [
+   "agroforestry",
+   "silvopasture",
+   "individual-based",
+   "spatial",
+   "shading",
+   "association"
+  ],
+  "page": "https://robert-mue.github.io/model_gallery/models/agroforestry/"
+ },
+ "presentation": {
+  "run": {
+   "runLength": 60,
+   "logEach": 0.5,
+   "timeStep": "0.1"
+  },
+  "displays": [
+   {
+    "widget": "field3d"
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node32"
+    ]
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node33"
+    ]
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node34"
+    ]
+   },
+   {
+    "widget": "sliders"
+   }
+  ]
+ }
+}
