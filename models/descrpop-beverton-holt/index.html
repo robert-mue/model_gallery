@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beverton-Holt (descriptive population model) — Simile model gallery</title>
+<link rel="stylesheet" href="../../gallery.css">
+</head>
+<body>
+<main>
+<p class="crumb"><a href="../../">Simile model gallery</a></p>
+<h1>Beverton-Holt (descriptive population model)</h1>
+<p class="lede">One population N, its next value given by an equation describing density dependence: growth saturates smoothly towards an equilibrium, never overshooting; crowding set by a. One of thirteen such equations in the program, each here a model of its own, listed under &quot;Family&quot;. Default values are chosen for illustration (the program asks for them).</p>
+<p>It opens with its plots and its sliders: move a slider and the model runs again.</p>
+<a class="open" href="https://robert-mue.github.io/simile/index.html?open=https://robert-mue.github.io/model_gallery/models/descrpop-beverton-holt/descrpop-beverton-holt.json" target="_blank" rel="noopener">Open in Simile</a>
+<p class="facts">From Norman Owen-Smith's book <i>Introduction to Modeling in Wildlife and Resource Conservation</i> (Blackwell, 2007), converted from its TrueBASIC program DESCRPOP.tru and published here with his permission. The model spec: <a href="descrpop-beverton-holt.json">descrpop-beverton-holt.json</a>.</p>
+<figure><img src="diagram.png" width="649" height="637" alt="The diagram of Beverton-Holt (descriptive population model)"><figcaption>The model's diagram.</figcaption></figure>
+<h2>Descriptive population models: thirteen forms of density dependence</h2>
+<p>Each is a model of its own. In Simile, the Metadata panel (Widgets › Metadata) lists them too, and opens any of them beside this one.</p>
+<ol>
+<li><a href="../descrpop-ceiling/">Exponential growth with a ceiling</a>: grows by a fixed proportion each year until it reaches K, then stays there</li>
+<li><a href="../descrpop-logistic/">Logistic</a>: growth slows in a straight line as N approaches K; with large r it overshoots, cycles or becomes chaotic</li>
+<li><a href="../descrpop-ricker/">Ricker</a>: like the logistic but never negative; with high r it cycles and becomes chaotic</li>
+<li><b>Beverton-Holt</b> (this model): growth saturates smoothly towards an equilibrium, never overshooting; crowding set by a</li>
+<li><a href="../descrpop-gen-beverton-holt/">Generalised Beverton-Holt</a>: an exponent b sets how sharply crowding takes effect</li>
+<li><a href="../descrpop-theta-logistic/">Theta-logistic</a>: an exponent p sets where density dependence bites: late (p &gt; 1) or early (p &lt; 1)</li>
+<li><a href="../descrpop-threshold-logistic/">Threshold logistic</a>: exponential growth below a threshold density A, logistic between A and K</li>
+<li><a href="../descrpop-lagged-logistic/">Lagged logistic</a>: crowding judged by the population some years ago, so it overshoots and cycles</li>
+<li><a href="../descrpop-cyclic-k/">Logistic with cyclic K</a>: the carrying capacity swings by half around K over a set period</li>
+<li><a href="../descrpop-random-k/">Logistic with random K</a>: K drawn afresh each year between half and one and a half times its mean</li>
+<li><a href="../descrpop-theta-random-k/">Theta-logistic with random K</a>: the theta-logistic, with K random each year</li>
+<li><a href="../descrpop-gen-bh-random-k/">Generalised Beverton-Holt with random K</a>: the generalised Beverton-Holt, with K random each year</li>
+<li><a href="../descrpop-allee/">Allee effect</a>: at low density growth falls rather than rises, so a small population can decline to extinction</li>
+</ol>
+</main>
+</body>
+</html>

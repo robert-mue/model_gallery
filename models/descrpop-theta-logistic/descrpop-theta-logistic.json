@@ -1,0 +1,270 @@
+{
+ "format": 3,
+ "schema": "simile-v1",
+ "id": "descrpop_theta_logistic",
+ "name": "Theta-logistic",
+ "enums": {},
+ "nodes": {
+  "node1": {
+   "type": "stock",
+   "parent": null,
+   "label": "N",
+   "props": {
+    "initial": "N0",
+    "units": ""
+   }
+  },
+  "node2": {
+   "type": "valve",
+   "parent": null,
+   "label": "growth",
+   "props": {
+    "rate": "r*N*(1-(N/K)^p)",
+    "units": ""
+   }
+  },
+  "node3": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node4": {
+   "type": "variable",
+   "parent": null,
+   "label": "N0",
+   "props": {
+    "paramKind": "variable",
+    "value": "10",
+    "min": "1",
+    "max": "1000",
+    "units": ""
+   }
+  },
+  "node5": {
+   "type": "variable",
+   "parent": null,
+   "label": "r",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.5",
+    "min": "0",
+    "max": "3",
+    "units": ""
+   }
+  },
+  "node6": {
+   "type": "variable",
+   "parent": null,
+   "label": "K",
+   "props": {
+    "paramKind": "variable",
+    "value": "1000",
+    "min": "100",
+    "max": "5000",
+    "units": ""
+   }
+  },
+  "node7": {
+   "type": "variable",
+   "parent": null,
+   "label": "p",
+   "props": {
+    "paramKind": "variable",
+    "value": "2",
+    "min": "0.1",
+    "max": "5",
+    "units": ""
+   }
+  }
+ },
+ "arcs": {
+  "arc1": {
+   "type": "flow",
+   "props": {},
+   "from": "node3",
+   "to": "node1",
+   "valve": "node2"
+  },
+  "arc2": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node1",
+   "alias": "N0"
+  },
+  "arc3": {
+   "type": "influence",
+   "props": {},
+   "from": "node6",
+   "to": "node2",
+   "alias": "K"
+  },
+  "arc4": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node2",
+   "alias": "N"
+  },
+  "arc5": {
+   "type": "influence",
+   "props": {},
+   "from": "node7",
+   "to": "node2",
+   "alias": "p"
+  },
+  "arc6": {
+   "type": "influence",
+   "props": {},
+   "from": "node5",
+   "to": "node2",
+   "alias": "r"
+  }
+ },
+ "submodels": {},
+ "layout": {
+  "arcs": {},
+  "node1": {
+   "x": 420,
+   "y": 300
+  },
+  "node3": {
+   "x": 290,
+   "y": 300
+  },
+  "node4": {
+   "x": 300,
+   "y": 420
+  },
+  "node5": {
+   "x": 260,
+   "y": 170
+  },
+  "node6": {
+   "x": 420,
+   "y": 140
+  },
+  "node7": {
+   "x": 560,
+   "y": 170
+  }
+ },
+ "metadata": {
+  "title": "Theta-logistic (descriptive population model)",
+  "description": "One population N, its next value given by an equation describing density dependence: an exponent p sets where density dependence bites: late (p > 1) or early (p < 1). One of thirteen such equations in the program, each here a model of its own, listed under \"Family\". Default values are chosen for illustration (the program asks for them). Converted from the TrueBASIC program DESCRPOP.tru on the CD of the book.",
+  "keywords": [
+   "population",
+   "density dependence",
+   "teaching",
+   "theta-logistic"
+  ],
+  "page": "https://robert-mue.github.io/model_gallery/models/descrpop-theta-logistic/",
+  "paper": {
+   "citation": "Owen-Smith N (2007) Introduction to Modeling in Wildlife and Resource Conservation. Blackwell Publishing, Oxford. ISBN 978-1-4051-4439-1.",
+   "url": "https://gov.wiley.com/WileyCDA/WileyTitle/productCd-1405144394.html"
+  },
+  "family": {
+   "title": "Descriptive population models: thirteen forms of density dependence",
+   "members": [
+    {
+     "model": "descrpop-ceiling",
+     "title": "Exponential growth with a ceiling",
+     "summary": "grows by a fixed proportion each year until it reaches K, then stays there",
+     "file": "../descrpop-ceiling/descrpop-ceiling.json"
+    },
+    {
+     "model": "descrpop-logistic",
+     "title": "Logistic",
+     "summary": "growth slows in a straight line as N approaches K; with large r it overshoots, cycles or becomes chaotic",
+     "file": "../descrpop-logistic/descrpop-logistic.json"
+    },
+    {
+     "model": "descrpop-ricker",
+     "title": "Ricker",
+     "summary": "like the logistic but never negative; with high r it cycles and becomes chaotic",
+     "file": "../descrpop-ricker/descrpop-ricker.json"
+    },
+    {
+     "model": "descrpop-beverton-holt",
+     "title": "Beverton-Holt",
+     "summary": "growth saturates smoothly towards an equilibrium, never overshooting; crowding set by a",
+     "file": "../descrpop-beverton-holt/descrpop-beverton-holt.json"
+    },
+    {
+     "model": "descrpop-gen-beverton-holt",
+     "title": "Generalised Beverton-Holt",
+     "summary": "an exponent b sets how sharply crowding takes effect",
+     "file": "../descrpop-gen-beverton-holt/descrpop-gen-beverton-holt.json"
+    },
+    {
+     "model": "descrpop-theta-logistic",
+     "title": "Theta-logistic",
+     "summary": "an exponent p sets where density dependence bites: late (p > 1) or early (p < 1)",
+     "file": "../descrpop-theta-logistic/descrpop-theta-logistic.json"
+    },
+    {
+     "model": "descrpop-threshold-logistic",
+     "title": "Threshold logistic",
+     "summary": "exponential growth below a threshold density A, logistic between A and K",
+     "file": "../descrpop-threshold-logistic/descrpop-threshold-logistic.json"
+    },
+    {
+     "model": "descrpop-lagged-logistic",
+     "title": "Lagged logistic",
+     "summary": "crowding judged by the population some years ago, so it overshoots and cycles",
+     "file": "../descrpop-lagged-logistic/descrpop-lagged-logistic.json"
+    },
+    {
+     "model": "descrpop-cyclic-k",
+     "title": "Logistic with cyclic K",
+     "summary": "the carrying capacity swings by half around K over a set period",
+     "file": "../descrpop-cyclic-k/descrpop-cyclic-k.json"
+    },
+    {
+     "model": "descrpop-random-k",
+     "title": "Logistic with random K",
+     "summary": "K drawn afresh each year between half and one and a half times its mean",
+     "file": "../descrpop-random-k/descrpop-random-k.json"
+    },
+    {
+     "model": "descrpop-theta-random-k",
+     "title": "Theta-logistic with random K",
+     "summary": "the theta-logistic, with K random each year",
+     "file": "../descrpop-theta-random-k/descrpop-theta-random-k.json"
+    },
+    {
+     "model": "descrpop-gen-bh-random-k",
+     "title": "Generalised Beverton-Holt with random K",
+     "summary": "the generalised Beverton-Holt, with K random each year",
+     "file": "../descrpop-gen-bh-random-k/descrpop-gen-bh-random-k.json"
+    },
+    {
+     "model": "descrpop-allee",
+     "title": "Allee effect",
+     "summary": "at low density growth falls rather than rises, so a small population can decline to extinction",
+     "file": "../descrpop-allee/descrpop-allee.json"
+    }
+   ],
+   "current": "descrpop-theta-logistic"
+  }
+ },
+ "presentation": {
+  "run": {
+   "runLength": 50,
+   "logEach": 1,
+   "timeStep": "1"
+  },
+  "displays": [
+   {
+    "widget": "plotter",
+    "variables": [
+     "node1"
+    ]
+   },
+   {
+    "widget": "sliders"
+   }
+  ]
+ }
+}

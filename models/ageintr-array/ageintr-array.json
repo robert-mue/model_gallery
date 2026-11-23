@@ -1,0 +1,336 @@
+{
+ "format": 3,
+ "schema": "simile-v1",
+ "id": "ageintr_array",
+ "name": "Age classes: a submodel",
+ "enums": {},
+ "nodes": {
+  "node1": {
+   "type": "stock",
+   "parent": "submodel1",
+   "label": "n",
+   "props": {
+    "initial": "element([40, 20, 16, 14, 10], index(1))",
+    "units": ""
+   }
+  },
+  "node2": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "S",
+   "props": {
+    "value": "element([0.6, 0.85, 0.9, 0.9, 0.0], index(1))",
+    "units": ""
+   }
+  },
+  "node3": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "B",
+   "props": {
+    "value": "element([0.0, 0.0, 0.7, 0.85, 0.85], index(1))",
+    "units": ""
+   }
+  },
+  "node4": {
+   "type": "valve",
+   "parent": "submodel1",
+   "label": "ageing_in",
+   "props": {
+    "rate": "if index(1) == 1 then births else element([ageing], index(1)-1)",
+    "units": ""
+   }
+  },
+  "node5": {
+   "type": "cloud",
+   "parent": "submodel1",
+   "label": "",
+   "props": {}
+  },
+  "node6": {
+   "type": "valve",
+   "parent": "submodel1",
+   "label": "ageing_out",
+   "props": {
+    "rate": "S*n",
+    "units": ""
+   }
+  },
+  "node7": {
+   "type": "cloud",
+   "parent": "submodel1",
+   "label": "",
+   "props": {}
+  },
+  "node8": {
+   "type": "valve",
+   "parent": "submodel1",
+   "label": "death",
+   "props": {
+    "rate": "(1-S)*n",
+    "units": ""
+   }
+  },
+  "node9": {
+   "type": "cloud",
+   "parent": "submodel1",
+   "label": "",
+   "props": {}
+  },
+  "node10": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "fec",
+   "props": {
+    "value": "if index(1) == 1 then 0.0 else B*element([ageing], index(1)-1)",
+    "units": ""
+   }
+  },
+  "node11": {
+   "type": "variable",
+   "parent": null,
+   "label": "ageing",
+   "props": {
+    "value": "[ageing_out]",
+    "units": "array(1,5)"
+   }
+  },
+  "node12": {
+   "type": "variable",
+   "parent": null,
+   "label": "births",
+   "props": {
+    "value": "sum([fec])",
+    "units": ""
+   }
+  },
+  "node13": {
+   "type": "variable",
+   "parent": null,
+   "label": "total",
+   "props": {
+    "value": "sum([n])",
+    "units": ""
+   }
+  }
+ },
+ "arcs": {
+  "arc1": {
+   "type": "flow",
+   "props": {},
+   "from": "node5",
+   "to": "node1",
+   "valve": "node4"
+  },
+  "arc2": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node7",
+   "valve": "node6"
+  },
+  "arc3": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node9",
+   "valve": "node8"
+  },
+  "arc4": {
+   "type": "influence",
+   "props": {},
+   "from": "node11",
+   "to": "node4",
+   "alias": "ageing"
+  },
+  "arc5": {
+   "type": "influence",
+   "props": {},
+   "from": "node12",
+   "to": "node4",
+   "alias": "births"
+  },
+  "arc6": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node6",
+   "alias": "S"
+  },
+  "arc7": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node6",
+   "alias": "n"
+  },
+  "arc8": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node8",
+   "alias": "S"
+  },
+  "arc9": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node8",
+   "alias": "n"
+  },
+  "arc10": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node10",
+   "alias": "B"
+  },
+  "arc11": {
+   "type": "influence",
+   "props": {},
+   "from": "node11",
+   "to": "node10",
+   "alias": "ageing"
+  },
+  "arc12": {
+   "type": "influence",
+   "props": {},
+   "from": "node6",
+   "to": "node11",
+   "alias": "ageing_out"
+  },
+  "arc13": {
+   "type": "influence",
+   "props": {},
+   "from": "node10",
+   "to": "node12",
+   "alias": "fec"
+  },
+  "arc14": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node13",
+   "alias": "n"
+  }
+ },
+ "submodels": {
+  "submodel1": {
+   "kind": "fixed-membership",
+   "parent": null,
+   "label": "age_class",
+   "props": {
+    "dimensions": "5"
+   }
+  }
+ },
+ "layout": {
+  "arcs": {},
+  "submodel1": {
+   "x": 420,
+   "y": 330,
+   "w": 520,
+   "h": 300
+  },
+  "node1": {
+   "x": 420,
+   "y": 330
+  },
+  "node2": {
+   "x": 330,
+   "y": 230
+  },
+  "node3": {
+   "x": 560,
+   "y": 230
+  },
+  "node5": {
+   "x": 290,
+   "y": 330
+  },
+  "node7": {
+   "x": 550,
+   "y": 330
+  },
+  "node9": {
+   "x": 420,
+   "y": 440
+  },
+  "node10": {
+   "x": 560,
+   "y": 420
+  },
+  "node11": {
+   "x": 780,
+   "y": 330
+  },
+  "node12": {
+   "x": 780,
+   "y": 450
+  },
+  "node13": {
+   "x": 420,
+   "y": 560
+  }
+ },
+ "metadata": {
+  "title": "Age-structured population: one submodel, five instances",
+  "description": "Five age classes, newborns being class 0. Each year the animals in each class survive into the next, or die (none survive beyond class 4), and the survivors reaching classes 2 to 4 give birth. This version: the class written once, in a fixed-membership submodel; ageing passed between instances through an array every instance sees. The values of every instance's ageing_out make the array \"ageing\"; each class takes its inflow from the element for the class below (element([ageing], index(1)-1)), and class 0 from births. \"ageing\" is declared an array of 5 (its units), which Simile needs to know. Survival from ages 0-3: [0.6, 0.85, 0.9, 0.9]; births per animal reaching ages 2-4: [0.7, 0.85, 0.85]; starting numbers [40, 20, 16, 14, 10] (chosen for illustration: the program asks for them). Converted from the TrueBASIC program AGEINTR.tru on the CD of the book.",
+  "keywords": [
+   "population",
+   "age structure",
+   "Simile design",
+   "teaching"
+  ],
+  "page": "https://robert-mue.github.io/model_gallery/models/ageintr-array/",
+  "paper": {
+   "citation": "Owen-Smith N (2007) Introduction to Modeling in Wildlife and Resource Conservation. Blackwell Publishing, Oxford. ISBN 978-1-4051-4439-1.",
+   "url": "https://gov.wiley.com/WileyCDA/WileyTitle/productCd-1405144394.html"
+  },
+  "family": {
+   "title": "An age-structured population: four designs in Simile",
+   "members": [
+    {
+     "model": "ageintr-stocks",
+     "title": "A stock per age class",
+     "summary": "conventional System Dynamics: five stocks, ageing flows between them; easy to follow, but every class repeats the same equations",
+     "file": "../ageintr-stocks/ageintr-stocks.json"
+    },
+    {
+     "model": "ageintr-array",
+     "title": "One submodel, five instances",
+     "summary": "the class written once, in a fixed-membership submodel; ageing passed between instances through an array every instance sees",
+     "file": "../ageintr-array/ageintr-array.json"
+    },
+    {
+     "model": "ageintr-association",
+     "title": "Submodel and \"next class\" association",
+     "summary": "as the submodel, but each class receives only from the class below, through an association; the diagram shows the relationship",
+     "file": "../ageintr-association/ageintr-association.json"
+    }
+   ],
+   "current": "ageintr-array"
+  }
+ },
+ "presentation": {
+  "run": {
+   "runLength": 50,
+   "logEach": 1,
+   "timeStep": "1"
+  },
+  "displays": [
+   {
+    "widget": "plotter",
+    "variables": [
+     "node13"
+    ]
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node1"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,688 @@
+{
+ "format": 3,
+ "schema": "simile-v1",
+ "id": "ageintr_stocks",
+ "name": "Age classes: a stock each",
+ "enums": {},
+ "nodes": {
+  "node1": {
+   "type": "stock",
+   "parent": null,
+   "label": "Age_0",
+   "props": {
+    "initial": "40",
+    "units": ""
+   }
+  },
+  "node2": {
+   "type": "stock",
+   "parent": null,
+   "label": "Age_1",
+   "props": {
+    "initial": "20",
+    "units": ""
+   }
+  },
+  "node3": {
+   "type": "stock",
+   "parent": null,
+   "label": "Age_2",
+   "props": {
+    "initial": "16",
+    "units": ""
+   }
+  },
+  "node4": {
+   "type": "stock",
+   "parent": null,
+   "label": "Age_3",
+   "props": {
+    "initial": "14",
+    "units": ""
+   }
+  },
+  "node5": {
+   "type": "stock",
+   "parent": null,
+   "label": "Age_4",
+   "props": {
+    "initial": "10",
+    "units": ""
+   }
+  },
+  "node6": {
+   "type": "valve",
+   "parent": null,
+   "label": "ageing_0",
+   "props": {
+    "rate": "S0*Age_0",
+    "units": ""
+   }
+  },
+  "node7": {
+   "type": "valve",
+   "parent": null,
+   "label": "death_0",
+   "props": {
+    "rate": "(1-S0)*Age_0",
+    "units": ""
+   }
+  },
+  "node8": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node9": {
+   "type": "variable",
+   "parent": null,
+   "label": "S0",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.6",
+    "min": "0",
+    "max": "1",
+    "units": ""
+   }
+  },
+  "node10": {
+   "type": "valve",
+   "parent": null,
+   "label": "ageing_1",
+   "props": {
+    "rate": "S1*Age_1",
+    "units": ""
+   }
+  },
+  "node11": {
+   "type": "valve",
+   "parent": null,
+   "label": "death_1",
+   "props": {
+    "rate": "(1-S1)*Age_1",
+    "units": ""
+   }
+  },
+  "node12": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node13": {
+   "type": "variable",
+   "parent": null,
+   "label": "S1",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.85",
+    "min": "0",
+    "max": "1",
+    "units": ""
+   }
+  },
+  "node14": {
+   "type": "valve",
+   "parent": null,
+   "label": "ageing_2",
+   "props": {
+    "rate": "S2*Age_2",
+    "units": ""
+   }
+  },
+  "node15": {
+   "type": "valve",
+   "parent": null,
+   "label": "death_2",
+   "props": {
+    "rate": "(1-S2)*Age_2",
+    "units": ""
+   }
+  },
+  "node16": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node17": {
+   "type": "variable",
+   "parent": null,
+   "label": "S2",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.9",
+    "min": "0",
+    "max": "1",
+    "units": ""
+   }
+  },
+  "node18": {
+   "type": "valve",
+   "parent": null,
+   "label": "ageing_3",
+   "props": {
+    "rate": "S3*Age_3",
+    "units": ""
+   }
+  },
+  "node19": {
+   "type": "valve",
+   "parent": null,
+   "label": "death_3",
+   "props": {
+    "rate": "(1-S3)*Age_3",
+    "units": ""
+   }
+  },
+  "node20": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node21": {
+   "type": "variable",
+   "parent": null,
+   "label": "S3",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.9",
+    "min": "0",
+    "max": "1",
+    "units": ""
+   }
+  },
+  "node22": {
+   "type": "valve",
+   "parent": null,
+   "label": "death_4",
+   "props": {
+    "rate": "Age_4",
+    "units": ""
+   }
+  },
+  "node23": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node24": {
+   "type": "variable",
+   "parent": null,
+   "label": "B2",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.7",
+    "min": "0",
+    "max": "2",
+    "units": ""
+   }
+  },
+  "node25": {
+   "type": "variable",
+   "parent": null,
+   "label": "B3",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.85",
+    "min": "0",
+    "max": "2",
+    "units": ""
+   }
+  },
+  "node26": {
+   "type": "variable",
+   "parent": null,
+   "label": "B4",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.85",
+    "min": "0",
+    "max": "2",
+    "units": ""
+   }
+  },
+  "node27": {
+   "type": "valve",
+   "parent": null,
+   "label": "births",
+   "props": {
+    "rate": "B2*ageing_1 + B3*ageing_2 + B4*ageing_3",
+    "units": ""
+   }
+  },
+  "node28": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node29": {
+   "type": "variable",
+   "parent": null,
+   "label": "total",
+   "props": {
+    "value": "Age_0+Age_1+Age_2+Age_3+Age_4",
+    "units": ""
+   }
+  }
+ },
+ "arcs": {
+  "arc1": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node2",
+   "valve": "node6"
+  },
+  "arc2": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node8",
+   "valve": "node7"
+  },
+  "arc3": {
+   "type": "flow",
+   "props": {},
+   "from": "node2",
+   "to": "node3",
+   "valve": "node10"
+  },
+  "arc4": {
+   "type": "flow",
+   "props": {},
+   "from": "node2",
+   "to": "node12",
+   "valve": "node11"
+  },
+  "arc5": {
+   "type": "flow",
+   "props": {},
+   "from": "node3",
+   "to": "node4",
+   "valve": "node14"
+  },
+  "arc6": {
+   "type": "flow",
+   "props": {},
+   "from": "node3",
+   "to": "node16",
+   "valve": "node15"
+  },
+  "arc7": {
+   "type": "flow",
+   "props": {},
+   "from": "node4",
+   "to": "node5",
+   "valve": "node18"
+  },
+  "arc8": {
+   "type": "flow",
+   "props": {},
+   "from": "node4",
+   "to": "node20",
+   "valve": "node19"
+  },
+  "arc9": {
+   "type": "flow",
+   "props": {},
+   "from": "node5",
+   "to": "node23",
+   "valve": "node22"
+  },
+  "arc10": {
+   "type": "flow",
+   "props": {},
+   "from": "node28",
+   "to": "node1",
+   "valve": "node27"
+  },
+  "arc11": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node6",
+   "alias": "Age_0"
+  },
+  "arc12": {
+   "type": "influence",
+   "props": {},
+   "from": "node9",
+   "to": "node6",
+   "alias": "S0"
+  },
+  "arc13": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node7",
+   "alias": "Age_0"
+  },
+  "arc14": {
+   "type": "influence",
+   "props": {},
+   "from": "node9",
+   "to": "node7",
+   "alias": "S0"
+  },
+  "arc15": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node10",
+   "alias": "Age_1"
+  },
+  "arc16": {
+   "type": "influence",
+   "props": {},
+   "from": "node13",
+   "to": "node10",
+   "alias": "S1"
+  },
+  "arc17": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node11",
+   "alias": "Age_1"
+  },
+  "arc18": {
+   "type": "influence",
+   "props": {},
+   "from": "node13",
+   "to": "node11",
+   "alias": "S1"
+  },
+  "arc19": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node14",
+   "alias": "Age_2"
+  },
+  "arc20": {
+   "type": "influence",
+   "props": {},
+   "from": "node17",
+   "to": "node14",
+   "alias": "S2"
+  },
+  "arc21": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node15",
+   "alias": "Age_2"
+  },
+  "arc22": {
+   "type": "influence",
+   "props": {},
+   "from": "node17",
+   "to": "node15",
+   "alias": "S2"
+  },
+  "arc23": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node18",
+   "alias": "Age_3"
+  },
+  "arc24": {
+   "type": "influence",
+   "props": {},
+   "from": "node21",
+   "to": "node18",
+   "alias": "S3"
+  },
+  "arc25": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node19",
+   "alias": "Age_3"
+  },
+  "arc26": {
+   "type": "influence",
+   "props": {},
+   "from": "node21",
+   "to": "node19",
+   "alias": "S3"
+  },
+  "arc27": {
+   "type": "influence",
+   "props": {},
+   "from": "node5",
+   "to": "node22",
+   "alias": "Age_4"
+  },
+  "arc28": {
+   "type": "influence",
+   "props": {},
+   "from": "node24",
+   "to": "node27",
+   "alias": "B2"
+  },
+  "arc29": {
+   "type": "influence",
+   "props": {},
+   "from": "node25",
+   "to": "node27",
+   "alias": "B3"
+  },
+  "arc30": {
+   "type": "influence",
+   "props": {},
+   "from": "node26",
+   "to": "node27",
+   "alias": "B4"
+  },
+  "arc31": {
+   "type": "influence",
+   "props": {},
+   "from": "node10",
+   "to": "node27",
+   "alias": "ageing_1"
+  },
+  "arc32": {
+   "type": "influence",
+   "props": {},
+   "from": "node14",
+   "to": "node27",
+   "alias": "ageing_2"
+  },
+  "arc33": {
+   "type": "influence",
+   "props": {},
+   "from": "node18",
+   "to": "node27",
+   "alias": "ageing_3"
+  },
+  "arc34": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node29",
+   "alias": "Age_0"
+  },
+  "arc35": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node29",
+   "alias": "Age_1"
+  },
+  "arc36": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node29",
+   "alias": "Age_2"
+  },
+  "arc37": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node29",
+   "alias": "Age_3"
+  },
+  "arc38": {
+   "type": "influence",
+   "props": {},
+   "from": "node5",
+   "to": "node29",
+   "alias": "Age_4"
+  }
+ },
+ "submodels": {},
+ "layout": {
+  "arcs": {},
+  "node1": {
+   "x": 160,
+   "y": 300
+  },
+  "node2": {
+   "x": 340,
+   "y": 300
+  },
+  "node3": {
+   "x": 520,
+   "y": 300
+  },
+  "node4": {
+   "x": 700,
+   "y": 300
+  },
+  "node5": {
+   "x": 880,
+   "y": 300
+  },
+  "node8": {
+   "x": 160,
+   "y": 440
+  },
+  "node9": {
+   "x": 220,
+   "y": 180
+  },
+  "node12": {
+   "x": 340,
+   "y": 440
+  },
+  "node13": {
+   "x": 400,
+   "y": 180
+  },
+  "node16": {
+   "x": 520,
+   "y": 440
+  },
+  "node17": {
+   "x": 580,
+   "y": 180
+  },
+  "node20": {
+   "x": 700,
+   "y": 440
+  },
+  "node21": {
+   "x": 760,
+   "y": 180
+  },
+  "node23": {
+   "x": 880,
+   "y": 440
+  },
+  "node24": {
+   "x": 480,
+   "y": 560
+  },
+  "node25": {
+   "x": 660,
+   "y": 560
+  },
+  "node26": {
+   "x": 840,
+   "y": 560
+  },
+  "node28": {
+   "x": 40,
+   "y": 300
+  },
+  "node29": {
+   "x": 520,
+   "y": 80
+  }
+ },
+ "metadata": {
+  "title": "Age-structured population: a stock per age class",
+  "description": "Five age classes, newborns being class 0. Each year the animals in each class survive into the next, or die (none survive beyond class 4), and the survivors reaching classes 2 to 4 give birth. This version: conventional System Dynamics: five stocks, ageing flows between them; easy to follow, but every class repeats the same equations. Survival (S) and birth (B) rates are sliders. Survival from ages 0-3: [0.6, 0.85, 0.9, 0.9]; births per animal reaching ages 2-4: [0.7, 0.85, 0.85]; starting numbers [40, 20, 16, 14, 10] (chosen for illustration: the program asks for them). Converted from the TrueBASIC program AGEINTR.tru on the CD of the book.",
+  "keywords": [
+   "population",
+   "age structure",
+   "Simile design",
+   "teaching"
+  ],
+  "page": "https://robert-mue.github.io/model_gallery/models/ageintr-stocks/",
+  "paper": {
+   "citation": "Owen-Smith N (2007) Introduction to Modeling in Wildlife and Resource Conservation. Blackwell Publishing, Oxford. ISBN 978-1-4051-4439-1.",
+   "url": "https://gov.wiley.com/WileyCDA/WileyTitle/productCd-1405144394.html"
+  },
+  "family": {
+   "title": "An age-structured population: four designs in Simile",
+   "members": [
+    {
+     "model": "ageintr-stocks",
+     "title": "A stock per age class",
+     "summary": "conventional System Dynamics: five stocks, ageing flows between them; easy to follow, but every class repeats the same equations",
+     "file": "../ageintr-stocks/ageintr-stocks.json"
+    },
+    {
+     "model": "ageintr-array",
+     "title": "One submodel, five instances",
+     "summary": "the class written once, in a fixed-membership submodel; ageing passed between instances through an array every instance sees",
+     "file": "../ageintr-array/ageintr-array.json"
+    },
+    {
+     "model": "ageintr-association",
+     "title": "Submodel and \"next class\" association",
+     "summary": "as the submodel, but each class receives only from the class below, through an association; the diagram shows the relationship",
+     "file": "../ageintr-association/ageintr-association.json"
+    }
+   ],
+   "current": "ageintr-stocks"
+  }
+ },
+ "presentation": {
+  "run": {
+   "runLength": 50,
+   "logEach": 1,
+   "timeStep": "1"
+  },
+  "displays": [
+   {
+    "widget": "plotter",
+    "variables": [
+     "node29"
+    ]
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node1",
+     "node2",
+     "node3",
+     "node4",
+     "node5"
+    ]
+   },
+   {
+    "widget": "sliders"
+   }
+  ]
+ }
+}

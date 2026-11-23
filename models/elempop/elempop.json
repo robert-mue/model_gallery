@@ -1,0 +1,243 @@
+{
+ "format": 3,
+ "schema": "simile-v1",
+ "id": "elempop",
+ "name": "Elementary population model",
+ "enums": {},
+ "nodes": {
+  "node1": {
+   "type": "stock",
+   "parent": null,
+   "label": "Pop",
+   "props": {
+    "initial": "50",
+    "units": ""
+   }
+  },
+  "node2": {
+   "type": "valve",
+   "parent": null,
+   "label": "births",
+   "props": {
+    "rate": "birth_rate*Pop",
+    "units": ""
+   }
+  },
+  "node3": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node4": {
+   "type": "valve",
+   "parent": null,
+   "label": "deaths",
+   "props": {
+    "rate": "death_rate*Pop",
+    "units": ""
+   }
+  },
+  "node5": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node6": {
+   "type": "valve",
+   "parent": null,
+   "label": "over_ceiling",
+   "props": {
+    "rate": "max(0, Pop + births - deaths - carrying_capacity)",
+    "units": ""
+   }
+  },
+  "node7": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node8": {
+   "type": "variable",
+   "parent": null,
+   "label": "birth_rate",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.25",
+    "min": "0",
+    "max": "1",
+    "units": ""
+   }
+  },
+  "node9": {
+   "type": "variable",
+   "parent": null,
+   "label": "death_rate",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.1",
+    "min": "0",
+    "max": "1",
+    "units": ""
+   }
+  },
+  "node10": {
+   "type": "variable",
+   "parent": null,
+   "label": "carrying_capacity",
+   "props": {
+    "paramKind": "variable",
+    "value": "500",
+    "min": "100",
+    "max": "2000",
+    "units": ""
+   }
+  }
+ },
+ "arcs": {
+  "arc1": {
+   "type": "flow",
+   "props": {},
+   "from": "node3",
+   "to": "node1",
+   "valve": "node2"
+  },
+  "arc2": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node5",
+   "valve": "node4"
+  },
+  "arc3": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node7",
+   "valve": "node6"
+  },
+  "arc4": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node2",
+   "alias": "Pop"
+  },
+  "arc5": {
+   "type": "influence",
+   "props": {},
+   "from": "node8",
+   "to": "node2",
+   "alias": "birth_rate"
+  },
+  "arc6": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node4",
+   "alias": "Pop"
+  },
+  "arc7": {
+   "type": "influence",
+   "props": {},
+   "from": "node9",
+   "to": "node4",
+   "alias": "death_rate"
+  },
+  "arc8": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node6",
+   "alias": "Pop"
+  },
+  "arc9": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node6",
+   "alias": "births"
+  },
+  "arc10": {
+   "type": "influence",
+   "props": {},
+   "from": "node10",
+   "to": "node6",
+   "alias": "carrying_capacity"
+  },
+  "arc11": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node6",
+   "alias": "deaths"
+  }
+ },
+ "submodels": {},
+ "layout": {
+  "arcs": {},
+  "node1": {
+   "x": 400,
+   "y": 260
+  },
+  "node3": {
+   "x": 270,
+   "y": 260
+  },
+  "node5": {
+   "x": 530,
+   "y": 260
+  },
+  "node7": {
+   "x": 530,
+   "y": 305
+  },
+  "node8": {
+   "x": 270,
+   "y": 140
+  },
+  "node9": {
+   "x": 530,
+   "y": 140
+  },
+  "node10": {
+   "x": 560,
+   "y": 380
+  }
+ },
+ "metadata": {
+  "title": "Elementary population model",
+  "description": "A population growing by births and shrinking by deaths, each a fixed fraction of its size each year; growth is exponential until the population reaches a ceiling, its carrying capacity, which it cannot exceed. Converted from the TrueBASIC program ELEMPOP.tru on the CD of the book.",
+  "keywords": [
+   "population",
+   "exponential growth",
+   "carrying capacity",
+   "teaching"
+  ],
+  "page": "https://robert-mue.github.io/model_gallery/models/elempop/",
+  "paper": {
+   "citation": "Owen-Smith N (2007) Introduction to Modeling in Wildlife and Resource Conservation. Blackwell Publishing, Oxford. ISBN 978-1-4051-4439-1.",
+   "url": "https://gov.wiley.com/WileyCDA/WileyTitle/productCd-1405144394.html"
+  }
+ },
+ "presentation": {
+  "run": {
+   "runLength": 20,
+   "logEach": 1,
+   "timeStep": "1"
+  },
+  "displays": [
+   {
+    "widget": "plotter",
+    "variables": [
+     "node1"
+    ]
+   },
+   {
+    "widget": "sliders"
+   }
+  ]
+ }
+}

@@ -92,7 +92,22 @@ for name in models:
             # Its page here, as Simile's Metadata panel links to it.
             want = 'https://robert-mue.github.io/model_gallery/models/' + name + '/'
             if meta.get('page') != want: bad(where, 'its metadata page should be ' + want)
-            for k in sorted(set(meta) - {'title', 'description', 'keywords', 'page', 'paper'}):
+            # Its family (alternatives to one another, Simile's Metadata panel lists
+            # them as links): each member's file is in the gallery, and this one is
+            # among them, marked current.
+            fam = meta.get('family')
+            if fam is not None:
+                ms = fam.get('members') if isinstance(fam, dict) else None
+                if not isinstance(ms, list) or not ms or not fam.get('title'):
+                    bad(where, 'its metadata family needs a title and members')
+                else:
+                    if fam.get('current') != name or name not in [x.get('model') for x in ms]:
+                        bad(where, 'its family should list it, and mark it current')
+                    for x in ms:
+                        f = os.path.normpath(os.path.join(d, x.get('file') or ''))
+                        if not (x.get('model') and x.get('title') and x.get('file')) or not os.path.isfile(f):
+                            bad(where, 'its family member %s: no such file %s' % (x.get('model'), x.get('file')))
+            for k in sorted(set(meta) - {'title', 'description', 'keywords', 'page', 'paper', 'family'}):
                 bad(where, 'its metadata has ' + k + ', which Simile does not show')
         # Its default displays: what Simile opens it with (plots of element ids,
         # the sliders) and the run settings. Optional, but each model here has some.

@@ -1,0 +1,442 @@
+{
+ "format": 3,
+ "schema": "simile-v1",
+ "id": "habchoice",
+ "name": "Habitat choice",
+ "enums": {},
+ "nodes": {
+  "node1": {
+   "type": "stock",
+   "parent": "submodel1",
+   "label": "Food",
+   "props": {
+    "initial": "start_food",
+    "units": ""
+   }
+  },
+  "node2": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "energy",
+   "props": {
+    "value": "element([0.8, 0.65, 0.5], index(1))",
+    "units": ""
+   }
+  },
+  "node3": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "intake",
+   "props": {
+    "value": "max_intake*Food/(half_saturation + Food)",
+    "units": ""
+   }
+  },
+  "node4": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "gain",
+   "props": {
+    "value": "intake*energy",
+    "units": ""
+   }
+  },
+  "node5": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "share",
+   "props": {
+    "value": "if maximizing > 0.5 then (if gain >= best_gain then 1.0 else 0.0) else gain/total_gain",
+    "units": ""
+   }
+  },
+  "node6": {
+   "type": "valve",
+   "parent": "submodel1",
+   "label": "eaten",
+   "props": {
+    "rate": "intake*consumers*body_mass*share",
+    "units": ""
+   }
+  },
+  "node7": {
+   "type": "cloud",
+   "parent": "submodel1",
+   "label": "",
+   "props": {}
+  },
+  "node8": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "gain_obtained",
+   "props": {
+    "value": "gain*share",
+    "units": ""
+   }
+  },
+  "node9": {
+   "type": "variable",
+   "parent": null,
+   "label": "total_gain",
+   "props": {
+    "value": "sum([gain])",
+    "units": ""
+   }
+  },
+  "node10": {
+   "type": "variable",
+   "parent": null,
+   "label": "best_gain",
+   "props": {
+    "value": "greatest([gain])",
+    "units": ""
+   }
+  },
+  "node11": {
+   "type": "variable",
+   "parent": null,
+   "label": "mean_gain",
+   "props": {
+    "value": "sum([gain_obtained])",
+    "units": ""
+   }
+  },
+  "node12": {
+   "type": "variable",
+   "parent": null,
+   "label": "maximizing",
+   "props": {
+    "paramKind": "variable",
+    "value": "0",
+    "min": "0",
+    "max": "1",
+    "units": ""
+   }
+  },
+  "node13": {
+   "type": "variable",
+   "parent": null,
+   "label": "start_food",
+   "props": {
+    "paramKind": "variable",
+    "value": "100",
+    "min": "10",
+    "max": "300",
+    "units": ""
+   }
+  },
+  "node14": {
+   "type": "variable",
+   "parent": null,
+   "label": "max_intake",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.175",
+    "min": "0.01",
+    "max": "0.5",
+    "units": ""
+   }
+  },
+  "node15": {
+   "type": "variable",
+   "parent": null,
+   "label": "half_saturation",
+   "props": {
+    "paramKind": "variable",
+    "value": "20",
+    "min": "1",
+    "max": "100",
+    "units": ""
+   }
+  },
+  "node16": {
+   "type": "variable",
+   "parent": null,
+   "label": "consumers",
+   "props": {
+    "paramKind": "variable",
+    "value": "1",
+    "min": "0.1",
+    "max": "3",
+    "units": ""
+   }
+  },
+  "node17": {
+   "type": "variable",
+   "parent": null,
+   "label": "body_mass",
+   "props": {
+    "paramKind": "variable",
+    "value": "100",
+    "min": "10",
+    "max": "500",
+    "units": ""
+   }
+  }
+ },
+ "arcs": {
+  "arc1": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node7",
+   "valve": "node6"
+  },
+  "arc2": {
+   "type": "influence",
+   "props": {},
+   "from": "node13",
+   "to": "node1",
+   "alias": "start_food"
+  },
+  "arc3": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node3",
+   "alias": "Food"
+  },
+  "arc4": {
+   "type": "influence",
+   "props": {},
+   "from": "node15",
+   "to": "node3",
+   "alias": "half_saturation"
+  },
+  "arc5": {
+   "type": "influence",
+   "props": {},
+   "from": "node14",
+   "to": "node3",
+   "alias": "max_intake"
+  },
+  "arc6": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node4",
+   "alias": "energy"
+  },
+  "arc7": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node4",
+   "alias": "intake"
+  },
+  "arc8": {
+   "type": "influence",
+   "props": {},
+   "from": "node10",
+   "to": "node5",
+   "alias": "best_gain"
+  },
+  "arc9": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node5",
+   "alias": "gain"
+  },
+  "arc10": {
+   "type": "influence",
+   "props": {},
+   "from": "node12",
+   "to": "node5",
+   "alias": "maximizing"
+  },
+  "arc11": {
+   "type": "influence",
+   "props": {},
+   "from": "node9",
+   "to": "node5",
+   "alias": "total_gain"
+  },
+  "arc12": {
+   "type": "influence",
+   "props": {},
+   "from": "node17",
+   "to": "node6",
+   "alias": "body_mass"
+  },
+  "arc13": {
+   "type": "influence",
+   "props": {},
+   "from": "node16",
+   "to": "node6",
+   "alias": "consumers"
+  },
+  "arc14": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node6",
+   "alias": "intake"
+  },
+  "arc15": {
+   "type": "influence",
+   "props": {},
+   "from": "node5",
+   "to": "node6",
+   "alias": "share"
+  },
+  "arc16": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node8",
+   "alias": "gain"
+  },
+  "arc17": {
+   "type": "influence",
+   "props": {},
+   "from": "node5",
+   "to": "node8",
+   "alias": "share"
+  },
+  "arc18": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node9",
+   "alias": "gain"
+  },
+  "arc19": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node10",
+   "alias": "gain"
+  },
+  "arc20": {
+   "type": "influence",
+   "props": {},
+   "from": "node8",
+   "to": "node11",
+   "alias": "gain_obtained"
+  }
+ },
+ "submodels": {
+  "submodel1": {
+   "kind": "fixed-membership",
+   "parent": null,
+   "label": "habitat",
+   "props": {
+    "dimensions": "3"
+   }
+  }
+ },
+ "layout": {
+  "arcs": {},
+  "submodel1": {
+   "x": 420,
+   "y": 320,
+   "w": 560,
+   "h": 340
+  },
+  "node1": {
+   "x": 420,
+   "y": 300
+  },
+  "node2": {
+   "x": 250,
+   "y": 200
+  },
+  "node3": {
+   "x": 560,
+   "y": 200
+  },
+  "node4": {
+   "x": 420,
+   "y": 180
+  },
+  "node5": {
+   "x": 560,
+   "y": 420
+  },
+  "node7": {
+   "x": 550,
+   "y": 300
+  },
+  "node8": {
+   "x": 300,
+   "y": 440
+  },
+  "node9": {
+   "x": 800,
+   "y": 240
+  },
+  "node10": {
+   "x": 800,
+   "y": 340
+  },
+  "node11": {
+   "x": 800,
+   "y": 440
+  },
+  "node12": {
+   "x": 800,
+   "y": 560
+  },
+  "node13": {
+   "x": 120,
+   "y": 300
+  },
+  "node14": {
+   "x": 120,
+   "y": 420
+  },
+  "node15": {
+   "x": 120,
+   "y": 520
+  },
+  "node16": {
+   "x": 420,
+   "y": 600
+  },
+  "node17": {
+   "x": 560,
+   "y": 600
+  }
+ },
+ "metadata": {
+  "title": "Habitat choice through the dormant season",
+  "description": "Herbivores feed through 26 weeks of the dormant season in three habitats offering the same food but different energy yields (0.8, 0.65, 0.5), with no regrowth. They either spread across the habitats in proportion to the gains each offers (matching: maximizing = 0) or all feed where the gain is highest (maximizing = 1). Time is in weeks; food in g/m2. Converted from the TrueBASIC program HABCHOICE.TRU on the CD of the book.",
+  "keywords": [
+   "habitat choice",
+   "foraging",
+   "herbivore",
+   "ideal free distribution",
+   "functional response"
+  ],
+  "page": "https://robert-mue.github.io/model_gallery/models/habchoice/",
+  "paper": {
+   "citation": "Owen-Smith N (2007) Introduction to Modeling in Wildlife and Resource Conservation. Blackwell Publishing, Oxford. ISBN 978-1-4051-4439-1.",
+   "url": "https://gov.wiley.com/WileyCDA/WileyTitle/productCd-1405144394.html"
+  }
+ },
+ "presentation": {
+  "run": {
+   "runLength": 26,
+   "logEach": 1,
+   "timeStep": "1"
+  },
+  "displays": [
+   {
+    "widget": "plotter",
+    "variables": [
+     "node1"
+    ]
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node11"
+    ]
+   },
+   {
+    "widget": "sliders"
+   }
+  ]
+ }
+}

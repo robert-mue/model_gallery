@@ -6,6 +6,26 @@
     "lamos",
     "pangolin",
     "agroforestry",
-    "coral"
+    "coral",
+    "ageintr-array",
+    "ageintr-association",
+    "ageintr-stocks",
+    "descrpop-allee",
+    "descrpop-beverton-holt",
+    "descrpop-ceiling",
+    "descrpop-cyclic-k",
+    "descrpop-gen-beverton-holt",
+    "descrpop-gen-bh-random-k",
+    "descrpop-lagged-logistic",
+    "descrpop-logistic",
+    "descrpop-random-k",
+    "descrpop-ricker",
+    "descrpop-theta-logistic",
+    "descrpop-theta-random-k",
+    "descrpop-threshold-logistic",
+    "elempop",
+    "habchoice",
+    "hvcaughley",
+    "randomwalk"
   ]
 }

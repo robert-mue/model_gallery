@@ -22,3 +22,6 @@ figure { margin: 1.5rem 0; }
 figure img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
 figcaption { color: var(--muted); font-size: .9rem; margin-top: .3rem; }
 footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+
+/* A section of the front page (the Owen-Smith models) */
+h2.group { margin: 2.2em 0 0.3em; font-size: 1.35em; }

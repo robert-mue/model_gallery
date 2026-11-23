@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Age-structured population: one submodel, five instances — Simile model gallery</title>
+<link rel="stylesheet" href="../../gallery.css">
+</head>
+<body>
+<main>
+<p class="crumb"><a href="../../">Simile model gallery</a></p>
+<h1>Age-structured population: one submodel, five instances</h1>
+<p class="lede">Five age classes, newborns being class 0. Each year the animals in each class survive into the next, or die (none survive beyond class 4), and the survivors reaching classes 2 to 4 give birth. This version: the class written once, in a fixed-membership submodel; ageing passed between instances through an array every instance sees. The values of every instance&#x27;s ageing_out make the array &quot;ageing&quot;; each class takes its inflow from the element for the class below (element([ageing], index(1)-1)), and class 0 from births. &quot;ageing&quot; is declared an array of 5 (its units), which Simile needs to know. Survival from ages 0-3: [0.6, 0.85, 0.9, 0.9]; births per animal reaching ages 2-4: [0.7, 0.85, 0.85]; starting numbers [40, 20, 16, 14, 10] (chosen for illustration: the program asks for them).</p>
+<p>It opens with its plots and its sliders: move a slider and the model runs again.</p>
+<a class="open" href="https://robert-mue.github.io/simile/index.html?open=https://robert-mue.github.io/model_gallery/models/ageintr-array/ageintr-array.json" target="_blank" rel="noopener">Open in Simile</a>
+<p class="facts">From Norman Owen-Smith's book <i>Introduction to Modeling in Wildlife and Resource Conservation</i> (Blackwell, 2007), converted from its TrueBASIC program AGEINTR.tru and published here with his permission. The model spec: <a href="ageintr-array.json">ageintr-array.json</a>.</p>
+<figure><img src="diagram.png" width="1000" height="637" alt="The diagram of Age-structured population: one submodel, five instances"><figcaption>The model's diagram.</figcaption></figure>
+<h2>An age-structured population: four designs in Simile</h2>
+<p>Each is a model of its own. In Simile, the Metadata panel (Widgets › Metadata) lists them too, and opens any of them beside this one.</p>
+<ol>
+<li><a href="../ageintr-stocks/">A stock per age class</a>: conventional System Dynamics: five stocks, ageing flows between them; easy to follow, but every class repeats the same equations</li>
+<li><b>One submodel, five instances</b> (this model): the class written once, in a fixed-membership submodel; ageing passed between instances through an array every instance sees</li>
+<li><a href="../ageintr-association/">Submodel and &quot;next class&quot; association</a>: as the submodel, but each class receives only from the class below, through an association; the diagram shows the relationship</li>
+</ol>
+</main>
+</body>
+</html>

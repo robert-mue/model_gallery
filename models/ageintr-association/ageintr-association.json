@@ -1,0 +1,394 @@
+{
+ "format": 3,
+ "schema": "simile-v1",
+ "id": "ageintr_association",
+ "name": "Age classes: a next-class association",
+ "enums": {},
+ "nodes": {
+  "node1": {
+   "type": "stock",
+   "parent": "submodel1",
+   "label": "n",
+   "props": {
+    "initial": "element([40, 20, 16, 14, 10], index(1))",
+    "units": ""
+   }
+  },
+  "node2": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "class_no",
+   "props": {
+    "value": "index(1)",
+    "units": ""
+   }
+  },
+  "node3": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "S",
+   "props": {
+    "value": "element([0.6, 0.85, 0.9, 0.9, 0.0], index(1))",
+    "units": ""
+   }
+  },
+  "node4": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "B",
+   "props": {
+    "value": "element([0.0, 0.0, 0.7, 0.85, 0.85], index(1))",
+    "units": ""
+   }
+  },
+  "node5": {
+   "type": "valve",
+   "parent": "submodel1",
+   "label": "ageing_in",
+   "props": {
+    "rate": "if index(1) == 1 then births else sum({transfer_older})",
+    "units": ""
+   }
+  },
+  "node6": {
+   "type": "cloud",
+   "parent": "submodel1",
+   "label": "",
+   "props": {}
+  },
+  "node7": {
+   "type": "valve",
+   "parent": "submodel1",
+   "label": "ageing_out",
+   "props": {
+    "rate": "S*n",
+    "units": ""
+   }
+  },
+  "node8": {
+   "type": "cloud",
+   "parent": "submodel1",
+   "label": "",
+   "props": {}
+  },
+  "node9": {
+   "type": "valve",
+   "parent": "submodel1",
+   "label": "death",
+   "props": {
+    "rate": "(1-S)*n",
+    "units": ""
+   }
+  },
+  "node10": {
+   "type": "cloud",
+   "parent": "submodel1",
+   "label": "",
+   "props": {}
+  },
+  "node11": {
+   "type": "variable",
+   "parent": "submodel1",
+   "label": "fec",
+   "props": {
+    "value": "B*sum({transfer_older})",
+    "units": ""
+   }
+  },
+  "node12": {
+   "type": "condition",
+   "parent": "submodel2",
+   "label": "is_next",
+   "props": {
+    "expr": "class_no_older == class_no_younger + 1"
+   }
+  },
+  "node13": {
+   "type": "variable",
+   "parent": "submodel2",
+   "label": "transfer",
+   "props": {
+    "value": "ageing_out_younger",
+    "units": ""
+   }
+  },
+  "node14": {
+   "type": "variable",
+   "parent": null,
+   "label": "births",
+   "props": {
+    "value": "sum([fec])",
+    "units": ""
+   }
+  },
+  "node15": {
+   "type": "variable",
+   "parent": null,
+   "label": "total",
+   "props": {
+    "value": "sum([n])",
+    "units": ""
+   }
+  }
+ },
+ "arcs": {
+  "arc1": {
+   "type": "role",
+   "props": {},
+   "from": "submodel1",
+   "to": "submodel2",
+   "label": "younger"
+  },
+  "arc2": {
+   "type": "role",
+   "props": {},
+   "from": "submodel1",
+   "to": "submodel2",
+   "label": "older"
+  },
+  "arc3": {
+   "type": "flow",
+   "props": {},
+   "from": "node6",
+   "to": "node1",
+   "valve": "node5"
+  },
+  "arc4": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node8",
+   "valve": "node7"
+  },
+  "arc5": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node10",
+   "valve": "node9"
+  },
+  "arc6": {
+   "type": "influence",
+   "props": {},
+   "from": "node14",
+   "to": "node5",
+   "alias": "births"
+  },
+  "arc7": {
+   "type": "influence",
+   "props": {},
+   "from": "node13",
+   "to": "node5",
+   "alias": "transfer"
+  },
+  "arc8": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node7",
+   "alias": "S"
+  },
+  "arc9": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node7",
+   "alias": "n"
+  },
+  "arc10": {
+   "type": "influence",
+   "props": {},
+   "from": "node3",
+   "to": "node9",
+   "alias": "S"
+  },
+  "arc11": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node9",
+   "alias": "n"
+  },
+  "arc12": {
+   "type": "influence",
+   "props": {},
+   "from": "node4",
+   "to": "node11",
+   "alias": "B"
+  },
+  "arc13": {
+   "type": "influence",
+   "props": {},
+   "from": "node13",
+   "to": "node11",
+   "alias": "transfer"
+  },
+  "arc14": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node12",
+   "alias": "class_no"
+  },
+  "arc15": {
+   "type": "influence",
+   "props": {},
+   "from": "node7",
+   "to": "node13",
+   "alias": "ageing_out"
+  },
+  "arc16": {
+   "type": "influence",
+   "props": {},
+   "from": "node11",
+   "to": "node14",
+   "alias": "fec"
+  },
+  "arc17": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node15",
+   "alias": "n"
+  }
+ },
+ "submodels": {
+  "submodel1": {
+   "kind": "fixed-membership",
+   "parent": null,
+   "label": "age_class",
+   "props": {
+    "dimensions": "5"
+   }
+  },
+  "submodel2": {
+   "kind": "single",
+   "parent": null,
+   "label": "next_class",
+   "props": {}
+  }
+ },
+ "layout": {
+  "arcs": {},
+  "submodel1": {
+   "x": 380,
+   "y": 300,
+   "w": 520,
+   "h": 300
+  },
+  "submodel2": {
+   "x": 820,
+   "y": 300,
+   "w": 240,
+   "h": 200
+  },
+  "node1": {
+   "x": 380,
+   "y": 300
+  },
+  "node2": {
+   "x": 560,
+   "y": 200
+  },
+  "node3": {
+   "x": 290,
+   "y": 200
+  },
+  "node4": {
+   "x": 560,
+   "y": 400
+  },
+  "node6": {
+   "x": 250,
+   "y": 300
+  },
+  "node8": {
+   "x": 510,
+   "y": 300
+  },
+  "node10": {
+   "x": 380,
+   "y": 410
+  },
+  "node11": {
+   "x": 560,
+   "y": 330
+  },
+  "node12": {
+   "x": 780,
+   "y": 260
+  },
+  "node13": {
+   "x": 860,
+   "y": 340
+  },
+  "node14": {
+   "x": 380,
+   "y": 520
+  },
+  "node15": {
+   "x": 560,
+   "y": 520
+  }
+ },
+ "metadata": {
+  "title": "Age-structured population: submodel and \"next class\" association",
+  "description": "Five age classes, newborns being class 0. Each year the animals in each class survive into the next, or die (none survive beyond class 4), and the survivors reaching classes 2 to 4 give birth. This version: as the submodel, but each class receives only from the class below, through an association; the diagram shows the relationship. In \"next_class\", one instance for each pair of classes where the older's number is one more than the younger's, \"transfer\" passes the younger's ageing_out to the older. Survival from ages 0-3: [0.6, 0.85, 0.9, 0.9]; births per animal reaching ages 2-4: [0.7, 0.85, 0.85]; starting numbers [40, 20, 16, 14, 10] (chosen for illustration: the program asks for them). Converted from the TrueBASIC program AGEINTR.tru on the CD of the book.",
+  "keywords": [
+   "population",
+   "age structure",
+   "Simile design",
+   "teaching"
+  ],
+  "page": "https://robert-mue.github.io/model_gallery/models/ageintr-association/",
+  "paper": {
+   "citation": "Owen-Smith N (2007) Introduction to Modeling in Wildlife and Resource Conservation. Blackwell Publishing, Oxford. ISBN 978-1-4051-4439-1.",
+   "url": "https://gov.wiley.com/WileyCDA/WileyTitle/productCd-1405144394.html"
+  },
+  "family": {
+   "title": "An age-structured population: four designs in Simile",
+   "members": [
+    {
+     "model": "ageintr-stocks",
+     "title": "A stock per age class",
+     "summary": "conventional System Dynamics: five stocks, ageing flows between them; easy to follow, but every class repeats the same equations",
+     "file": "../ageintr-stocks/ageintr-stocks.json"
+    },
+    {
+     "model": "ageintr-array",
+     "title": "One submodel, five instances",
+     "summary": "the class written once, in a fixed-membership submodel; ageing passed between instances through an array every instance sees",
+     "file": "../ageintr-array/ageintr-array.json"
+    },
+    {
+     "model": "ageintr-association",
+     "title": "Submodel and \"next class\" association",
+     "summary": "as the submodel, but each class receives only from the class below, through an association; the diagram shows the relationship",
+     "file": "../ageintr-association/ageintr-association.json"
+    }
+   ],
+   "current": "ageintr-association"
+  }
+ },
+ "presentation": {
+  "run": {
+   "runLength": 50,
+   "logEach": 1,
+   "timeStep": "1"
+  },
+  "displays": [
+   {
+    "widget": "plotter",
+    "variables": [
+     "node15"
+    ]
+   },
+   {
+    "widget": "plotter",
+    "variables": [
+     "node1"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,224 @@
+{
+ "format": 3,
+ "schema": "simile-v1",
+ "id": "randomwalk",
+ "name": "Random walk of a small population",
+ "enums": {},
+ "nodes": {
+  "node1": {
+   "type": "stock",
+   "parent": null,
+   "label": "Pop",
+   "props": {
+    "initial": "start_pop",
+    "units": ""
+   }
+  },
+  "node2": {
+   "type": "variable",
+   "parent": null,
+   "label": "dying",
+   "props": {
+    "value": "binome(1 - survival, int(Pop))",
+    "units": ""
+   }
+  },
+  "node3": {
+   "type": "valve",
+   "parent": null,
+   "label": "deaths",
+   "props": {
+    "rate": "dying",
+    "units": ""
+   }
+  },
+  "node4": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node5": {
+   "type": "valve",
+   "parent": null,
+   "label": "births",
+   "props": {
+    "rate": "binome(daughters, int(Pop - dying))",
+    "units": ""
+   }
+  },
+  "node6": {
+   "type": "cloud",
+   "parent": null,
+   "label": "",
+   "props": {}
+  },
+  "node7": {
+   "type": "variable",
+   "parent": null,
+   "label": "start_pop",
+   "props": {
+    "paramKind": "variable",
+    "value": "5",
+    "min": "1",
+    "max": "50",
+    "units": ""
+   }
+  },
+  "node8": {
+   "type": "variable",
+   "parent": null,
+   "label": "survival",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.8",
+    "min": "0",
+    "max": "1",
+    "units": ""
+   }
+  },
+  "node9": {
+   "type": "variable",
+   "parent": null,
+   "label": "daughters",
+   "props": {
+    "paramKind": "variable",
+    "value": "0.25",
+    "min": "0",
+    "max": "1",
+    "units": ""
+   }
+  }
+ },
+ "arcs": {
+  "arc1": {
+   "type": "flow",
+   "props": {},
+   "from": "node1",
+   "to": "node4",
+   "valve": "node3"
+  },
+  "arc2": {
+   "type": "flow",
+   "props": {},
+   "from": "node6",
+   "to": "node1",
+   "valve": "node5"
+  },
+  "arc3": {
+   "type": "influence",
+   "props": {},
+   "from": "node7",
+   "to": "node1",
+   "alias": "start_pop"
+  },
+  "arc4": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node2",
+   "alias": "Pop"
+  },
+  "arc5": {
+   "type": "influence",
+   "props": {},
+   "from": "node8",
+   "to": "node2",
+   "alias": "survival"
+  },
+  "arc6": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node3",
+   "alias": "dying"
+  },
+  "arc7": {
+   "type": "influence",
+   "props": {},
+   "from": "node1",
+   "to": "node5",
+   "alias": "Pop"
+  },
+  "arc8": {
+   "type": "influence",
+   "props": {},
+   "from": "node9",
+   "to": "node5",
+   "alias": "daughters"
+  },
+  "arc9": {
+   "type": "influence",
+   "props": {},
+   "from": "node2",
+   "to": "node5",
+   "alias": "dying"
+  }
+ },
+ "submodels": {},
+ "layout": {
+  "arcs": {},
+  "node1": {
+   "x": 400,
+   "y": 260
+  },
+  "node2": {
+   "x": 560,
+   "y": 150
+  },
+  "node4": {
+   "x": 530,
+   "y": 260
+  },
+  "node6": {
+   "x": 270,
+   "y": 260
+  },
+  "node7": {
+   "x": 400,
+   "y": 420
+  },
+  "node8": {
+   "x": 680,
+   "y": 260
+  },
+  "node9": {
+   "x": 240,
+   "y": 150
+  }
+ },
+ "metadata": {
+  "title": "Random walk of a small population",
+  "description": "Demographic stochasticity: each year every animal survives with probability 0.8, and each survivor produces a surviving daughter with probability 0.25 (a daughter, 0.5, that survives, 0.5), so the expected growth is zero. The population wanders at random until it dies out. Run it several times. (The program stopped at 0 or above 100; here the run is 100 years.) Converted from the TrueBASIC program RANDOMWALK.TRU on the CD of the book.",
+  "keywords": [
+   "population",
+   "stochastic",
+   "demographic stochasticity",
+   "extinction",
+   "random walk"
+  ],
+  "page": "https://robert-mue.github.io/model_gallery/models/randomwalk/",
+  "paper": {
+   "citation": "Owen-Smith N (2007) Introduction to Modeling in Wildlife and Resource Conservation. Blackwell Publishing, Oxford. ISBN 978-1-4051-4439-1.",
+   "url": "https://gov.wiley.com/WileyCDA/WileyTitle/productCd-1405144394.html"
+  }
+ },
+ "presentation": {
+  "run": {
+   "runLength": 100,
+   "logEach": 1,
+   "timeStep": "1"
+  },
+  "displays": [
+   {
+    "widget": "plotter",
+    "variables": [
+     "node1"
+    ]
+   },
+   {
+    "widget": "sliders"
+   }
+  ]
+ }
+}
